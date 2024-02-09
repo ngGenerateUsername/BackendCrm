@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,8 +26,9 @@ public class Categorie implements Serializable {
     private String nom;
     private double tva;
 
-    @OneToMany
+    @OneToMany(mappedBy = "categorie")
     @JsonIgnoreProperties(value = {"categorie"})
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Produit> produits;
 
 }

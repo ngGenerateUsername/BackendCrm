@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -32,7 +36,8 @@ public class Produit implements Serializable {
     
     
     @JsonIgnoreProperties(value = {"produits"})
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Categorie categorie;
 
     @OneToMany(mappedBy = "produit")

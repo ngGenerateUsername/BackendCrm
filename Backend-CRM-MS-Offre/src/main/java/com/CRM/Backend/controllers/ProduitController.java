@@ -25,6 +25,8 @@ public class ProduitController {
 
     @Autowired
     ICategorieService iCategorieService;
+
+    @Autowired
     CategorieRepository categorieRepository;
     Categorie categorie;
 
@@ -70,8 +72,11 @@ public class ProduitController {
     @PutMapping()
     @ResponseBody
     public Produit updateProduit(@RequestBody Produit produit){
-        Categorie categorie = categorieRepository.findCategorieByNom(produit.getCategorie().getNom());
-            produit.getCategorie().setIdCategorie(categorie.getIdCategorie());
+        
+            Categorie categorie = categorieRepository.findById(produit.getCategorie().getIdCategorie()).get();
+       
+            produit.setCategorie(categorie);
+            // produit.getCategorie().setProduits(produit);
             return iProduitService.updateProduit(produit);
     }
     

@@ -59,7 +59,7 @@ public class Offre implements Serializable {
 
         for (LigneOffre ligneOffre : ligneOffres) {
             totalHt = ligneOffre.getPrixHT() + totalHt;
-            totalHTTC = ligneOffre.getPrixTTC() + totalHTTC + 1;
+            totalHTTC = ligneOffre.getPrixTTC() + totalHTTC;
             MontantTva = MontantTva + (ligneOffre.getPrixTTC() - ligneOffre.getPrixHT());
         }
 

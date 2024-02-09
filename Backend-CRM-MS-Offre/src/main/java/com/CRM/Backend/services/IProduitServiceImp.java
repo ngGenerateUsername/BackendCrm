@@ -19,9 +19,10 @@ public class IProduitServiceImp implements IProduitService {
 
     @Override
     public Produit addProduit(Produit produit, String nom) {
-        Categorie categorie = categorieRepository.findCategorieByNom(nom);
+        Categorie categorie = categorieRepository.findById(Long.parseLong(nom)).get();
         produit.setCategorie(categorie);
         double prixInitial = produit.getPrixInitial();
+        System.out.println("this is prix initiale : "+produit.getPrixInitial());
         double prixAvecTva = prixInitial * (1 + categorie.getTva() / 100);
         produit.setPrixAvecTva(prixAvecTva);
         produit.setPrixInitial(prixInitial);

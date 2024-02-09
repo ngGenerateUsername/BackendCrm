@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/offre")
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:4200")
 public class OffreController {
     @Autowired
     IOffreService iOffreService;
