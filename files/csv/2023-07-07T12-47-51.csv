@@ -1,0 +1,5 @@
+idOpportunite,titre,revenuespere,pourcentage,telephone,notes,nomSocieteContact,nomContact,adresseContact,siteWebContact,postes,mobileContact,dateDeFermeturePrevue,dateCreation,dateFerme,dateCONFIRMEE,datePERDUE,dateSIGNEE,dateModification,datePOTENTIEL,datePISTE,statusOpportunite,langues,prioriteOpportunite,idCommercial,idEntreprise,idModificateur,idCreateur,idClient,contrat,email
+1,Test opportnite n 1 ,70000,70.5,26152925,,,,,,,null,2023-07-13,2023-07-03,null,2023-07-06,2023-07-03,2023-07-06,2023-07-06,2023-07-03,2023-07-06,SIGNEE,null,MOYEN,8,2,null,3,5,null,alaeddinedriss22@gmail.com
+3,test,80000,60,26152925,,,,,,,null,2023-07-13,2023-07-04,null,2023-07-06,2023-07-06,null,2023-07-06,2023-07-06,null,CONFIRMEE,null,MOYEN,3,2,null,3,5,null,ala@gmail.com
+4,Opportunite n°1,70000,50.8,55055356,,,,,,,null,2023-07-13,2023-07-06,null,2023-07-06,null,2023-07-06,2023-07-06,2023-07-06,2023-07-06,PISTE,null,MOYEN,8,2,null,3,1,null,alaeddine@gmail.com
+2,test2,85000,70,55055456,,,,,,,null,2023-07-05,2023-07-04,null,2023-07-04,null,null,2023-07-04,null,null,CONFIRMEE,null,FAIBLE,8,2,null,3,5,null,aalaaa@ff.com
