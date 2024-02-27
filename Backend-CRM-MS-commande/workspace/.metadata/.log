@@ -1,0 +1,119 @@
+!SESSION 2023-08-03 13:24:59.674 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.19
+java.vendor=Red Hat, Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.691
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.834
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.860
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.860
+!MESSAGE Initializing Java Language Server 1.10.0.202203040350
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.871
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.871
+!MESSAGE Non-Static Commands: [java.edit.organizeImports, java.project.refreshDiagnostics, java.project.import, java.navigate.openTypeHierarchy, java.project.removeFromSourcePath, java.project.listSourcePaths, java.project.resolveStackTraceLocation, java.project.getAll, java.project.isTestFile, java.project.getClasspaths, java.navigate.resolveTypeHierarchy, java.edit.stringFormatting, java.project.getSettings, java.project.updateSourceAttachment, java.project.upgradeGradle, java.project.resolveSourceAttachment, java.project.addToSourcePath]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.874
+!MESSAGE Wait for AutoBuildOffJob start
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.874
+!MESSAGE Wait for AutoBuildOffJob end 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.874
+!MESSAGE Starting org.eclipse.m2e.core
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.875
+!MESSAGE Started org.eclipse.m2e.core 1ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.875
+!MESSAGE ProjectRegistryRefreshJob finished 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.875
+!MESSAGE Starting org.eclipse.buildship.core
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.885
+!MESSAGE Started org.eclipse.buildship.core 10ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.906
+!MESSAGE LoadingGradleVersionJob finished 20ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.916
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.918
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:00.961
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.269
+!MESSAGE Importing Maven project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2023-08-03 13:25:01.628
+!MESSAGE Initialization failed 
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to import projects
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.importProjects(ProjectsManager.java:136)
+	at org.eclipse.jdt.ls.core.internal.managers.ProjectsManager.initializeProjects(ProjectsManager.java:107)
+	at org.eclipse.jdt.ls.core.internal.handlers.InitHandler$1.runInWorkspace(InitHandler.java:244)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Contains: Invalid project description.
+Contains: OK
+Contains: /home/trycatch/workspace/projetStage/CRM/BackEnd/Backend-CRM-MS-ticket overlaps the workspace location: /home/trycatch/workspace/projetStage/CRM/BackEnd/Backend-CRM-MS-ticket/workspace
+!SUBENTRY 1 org.eclipse.jdt.ls.core 4 -1 2023-08-03 13:25:01.628
+!MESSAGE Failed to import projects
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2023-08-03 13:25:01.628
+!MESSAGE Invalid project description.
+!SUBENTRY 3 unknown 0 0 2023-08-03 13:25:01.628
+!MESSAGE OK
+!SUBENTRY 3 org.eclipse.core.resources 4 77 2023-08-03 13:25:01.628
+!MESSAGE /home/trycatch/workspace/projetStage/CRM/BackEnd/Backend-CRM-MS-ticket overlaps the workspace location: /home/trycatch/workspace/projetStage/CRM/BackEnd/Backend-CRM-MS-ticket/workspace
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.661
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.663
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.683
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.685
+!MESSAGE >> registerWatchers'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:01.685
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:02.250
+!MESSAGE Reconciled 1. Took 0 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:02.829
+!MESSAGE begin problem for /ticket.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:02.830
+!MESSAGE 1 problems reported for /ticket.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:02.832
+!MESSAGE Validated 1. Took 181 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:16.137
+!MESSAGE >> shutdown
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:16.160
+!MESSAGE >> exit
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:16.166
+!MESSAGE Shutdown received... waking up main thread
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2023-08-03 13:25:16.173
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is stopping:
