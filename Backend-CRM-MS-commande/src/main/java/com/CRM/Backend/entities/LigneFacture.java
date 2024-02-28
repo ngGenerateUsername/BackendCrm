@@ -25,21 +25,18 @@ public class LigneFacture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    @JsonIgnoreProperties(value = {"lignes"})
     @ManyToOne
-    @JoinColumn(name = "facture_id")
+    @JoinColumn(name = "Idcommande")
+    private Commande commande;
+
+    @ManyToOne
+    @JoinColumn(name = "IdFacture")
     private Facture facture;
+    @JsonIgnoreProperties(value = {"lignes"})
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime created_at;
-
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
-
-
+    private   LocalDateTime DateCreation;
     private double prixHT;
     private double prixHTTC;
 

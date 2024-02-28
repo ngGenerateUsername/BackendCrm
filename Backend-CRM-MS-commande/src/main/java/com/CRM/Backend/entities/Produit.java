@@ -28,10 +28,17 @@ public class Produit implements Serializable {
     private String description;
     private double prixInitial;
     private double prixAvecTva;
-    private  double TVA;
     private int Qte;
     private int MinQte;
+    @JsonIgnoreProperties(value = {"produits"})
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Categorie categorie;
 
+
+    @OneToMany(mappedBy = "produit",cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value={"produit:"})
+    private List<LigneCommande> lignesC;
 
 
     //auto calculate tva when adding new product
@@ -39,10 +46,22 @@ public class Produit implements Serializable {
     @PreUpdate
     private void calculatePrixAvecTva()
     {
-            prixAvecTva = prixInitial * (1 + TVA /100);
-
+        if(categorie != null)
+        {
+            prixAvecTva = prixInitial * (1 + categorie.getTva()/100);
+        }else
+        {
+            prixAvecTva = prixInitial;
+        }
     }
 
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 
     public Long getIdProduit() {
         return idProduit;
@@ -92,13 +111,7 @@ public class Produit implements Serializable {
         this.prixAvecTva = prixAvecTva;
     }
 
-    public double getTVA() {
-        return TVA;
-    }
 
-    public void setTVA(double TVA) {
-        this.TVA = TVA;
-    }
 
     public int getQte() {
         return Qte;

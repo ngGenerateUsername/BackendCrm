@@ -1,5 +1,4 @@
 package com.CRM.Backend.servicesInterfaces;
 
-public interface IFactureService {
-
+public interface ICategorieService {
 }

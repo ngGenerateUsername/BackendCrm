@@ -27,22 +27,14 @@ public class Facture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
-    // @Temporal(TemporalType.DATE)
-    // private Date dateCreation;
 
-    private String title;
+    private String Titre;
 
     @CreationTimestamp
     @Column(updatable = false,nullable = false)
-    private LocalDateTime created_at;
-
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
-
+    private LocalDateTime dateCreation;
     private double montantTotalHT;
     private double montantTotalHTTC;
-
-
     Long idClient;
     Long idCommercial;
 
