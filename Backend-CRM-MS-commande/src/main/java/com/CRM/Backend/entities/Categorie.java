@@ -61,5 +61,16 @@ public class Categorie implements Serializable {
 
     public void setProduits(List<Produit> produits) {
         this.produits = produits;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "idCategorie=" + idCategorie +
+                ", nom='" + nom + '\'' +
+                ", tva=" + tva +
+                ", produits=" + produits +
+                '}';
     }
 }

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+//import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class AuthEntryPointJwt implements AuthenticationEntryPoint {
-
+public class AuthEntryPointJwt {//  implements AuthenticationEntryPoint {
+/*
   private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
   @Override
@@ -39,5 +39,5 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
 //    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
   }
-
+*/
 }

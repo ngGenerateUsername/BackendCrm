@@ -20,7 +20,8 @@ public class DTOProduit {
     private double prixAvecTva;
     private int Qte;
     private int MinQte;
-    private Categorie categorie;
+    private Long idcategorie;
+    private Long idEntreprise;
     private List<LigneCommande> lignesC;
 
 

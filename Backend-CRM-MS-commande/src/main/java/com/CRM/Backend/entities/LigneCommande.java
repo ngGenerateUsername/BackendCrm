@@ -1,11 +1,9 @@
 package com.CRM.Backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 @Getter
@@ -15,8 +13,9 @@ import java.io.Serializable;
 @Data
 @Builder
 public class LigneCommande implements Serializable {
-    @Id
-    private Long id;
+     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private Long idldc;
 
     private int Qte;
     private Double PrixTotale;
@@ -28,6 +27,8 @@ public class LigneCommande implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "IdProduit")
+    @JsonIgnore
+
     private Produit produit;
 
 
@@ -37,11 +38,5 @@ public class LigneCommande implements Serializable {
 
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
 }

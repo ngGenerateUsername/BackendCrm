@@ -10,11 +10,11 @@ import lombok.Builder;
 @Getter
 @Builder
 public class DTOLigneCommande {
-    private Long id;
+    private Long idldc;
     private int Qte;
     private Double PrixTotale;
     private Commande commande;
-    private Produit produit;
+    private Long idproduit;
 
 
 }
