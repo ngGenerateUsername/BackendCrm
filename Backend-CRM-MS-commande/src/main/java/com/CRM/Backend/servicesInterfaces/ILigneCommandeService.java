@@ -7,9 +7,10 @@ import com.CRM.Backend.entities.LigneCommande;
 import java.util.List;
 
 public interface ILigneCommandeService {
-    public String addLigneCommande(DTOLigneCommande dtoLigneCommande, Long idProduit);
-    public List<LigneCommande> getAllLigneCommande();
+    public String addLigneCommande(DTOLigneCommande dtoLigneCommande, Long idProduit,Long idcontact);
+    public List<DTOLigneCommande> getAllLigneCommande();
     public LigneCommande getById(Long idLigneCommande );
     public void removeLigneCommande(Long idLigneCommande );
     public LigneCommande updateLigneCommande(LigneCommande ligneCommande);
+    public List<DTOLigneCommande> getAllLigneCommandebyuser(Long id);
 }

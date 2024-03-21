@@ -19,6 +19,7 @@ public class LigneCommande implements Serializable {
 
     private int Qte;
     private Double PrixTotale;
+    private Long idContact;
 
 
     @ManyToOne
