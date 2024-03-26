@@ -16,6 +16,7 @@ public class ICommandeServiceImpl implements ICommandeService {
 
     @Override
     public Facture addFacture(Facture facture) {
+        //            ldc.setPassed(true);
         return null;
     }
 

@@ -2,6 +2,7 @@ package com.CRM.Backend.repositories;
 
 
 import com.CRM.Backend.entities.LigneCommande;
+import com.CRM.Backend.entities.Produit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,11 @@ import java.util.List;
 
 public interface LigneCommandeREpository extends JpaRepository<LigneCommande,Long> {
     List<LigneCommande> findAllByIdContact(Long id);
+
+    List<LigneCommande> findAllByPassedFalseAndIdContact (Long id);
+
+
+    List<LigneCommande> findByIdContactAndProduit(Long idContact, Produit produit);
+
 
 }

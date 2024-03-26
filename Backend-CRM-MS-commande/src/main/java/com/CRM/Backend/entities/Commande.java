@@ -27,7 +27,7 @@ public class Commande implements Serializable {
 
     @CreationTimestamp
     private LocalDateTime DateLivraison;
-
+    private  long prixtotale;
     private Long idContact;
     private Long IDResponsableStock;
     private String adressCommande;

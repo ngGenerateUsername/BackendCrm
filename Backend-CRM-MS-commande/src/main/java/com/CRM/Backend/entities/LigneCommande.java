@@ -31,6 +31,7 @@ public class LigneCommande implements Serializable {
     @JsonIgnore
 
     private Produit produit;
+    private  boolean passed = false;
 
 
 

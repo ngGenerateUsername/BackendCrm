@@ -17,6 +17,8 @@ public class DTOLigneCommande {
   //  private Long idproduit;
     private String nomproduit;
     private Long idcontact;
+    private  boolean passed  = false;
+
 
 
 }
