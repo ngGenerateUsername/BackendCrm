@@ -34,6 +34,8 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         ldc.setProduit(p);
         ldc.setIdContact(idcontact );
         ldc.setPrixTotale(p.getPrixAvecTva() * dtoLigneCommande.getQte());
+
+
        // if (q > ldc.getQte()) {
 
             if (!existingItems.isEmpty()) {
@@ -70,6 +72,8 @@ public class ILigneCommandeImp implements ILigneCommandeService {
             prod.setQte(p.getQte());
             prod.setPrixTotale(p.getPrixTotale());
             prod.setPassed(p.isPassed());
+            prod.setNom(p.getProduit().getCategorie().getNom());
+            prod.setTva(p.getProduit().getCategorie().getTva());
              lcdcmd.add(prod);
         }
         return lcdcmd;
@@ -87,12 +91,19 @@ public class ILigneCommandeImp implements ILigneCommandeService {
 
     @Override
     public void removeLigneCommande(Long idLigneCommande) {
-
+        ligneCommandeREpository.deleteById(idLigneCommande);
     }
 
     @Override
-    public LigneCommande updateLigneCommande(LigneCommande ligneCommande) {
-        return null;
+    public LigneCommande updateLigneCommande(DTOLigneCommande dtoLigneCommande,Long idLigneCommande ) {
+        //LigneCommande ldc = new LigneCommande();
+        LigneCommande ldce = ligneCommandeREpository.findById(idLigneCommande).orElse(null);
+        ldce.setQte(dtoLigneCommande.getQte());
+        ldce.setPrixTotale(dtoLigneCommande.getQte()* (ldce.getProduit().getPrixAvecTva()));
+        ligneCommandeREpository.save(ldce);
+
+
+        return ldce;
     }
 
     @Override
@@ -105,6 +116,8 @@ public class ILigneCommandeImp implements ILigneCommandeService {
             prod.setQte(p.getQte());
             prod.setPrixTotale(p.getPrixTotale());
             prod.setPassed(p.isPassed());
+            prod.setNom(p.getProduit().getCategorie().getNom());
+            prod.setTva(p.getProduit().getCategorie().getTva());
             lcdcmd.add(prod);
         }
         return lcdcmd;

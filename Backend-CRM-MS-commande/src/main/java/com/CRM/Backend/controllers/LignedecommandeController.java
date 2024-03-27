@@ -28,5 +28,14 @@ public class LignedecommandeController {
     @GetMapping("ALLldc/{idconcat}")
     public List<DTOLigneCommande>  alllignecmduser( @PathVariable Long idconcat  ){
         return  iLigneCommandeService.getAllLigneCommandebyuser (idconcat);
+      }
+    @DeleteMapping("Deleteitempanier/{idLigneCommande}")
+    public void  Deleteldc(@PathVariable Long idLigneCommande  ){
+        iLigneCommandeService.removeLigneCommande(idLigneCommande);
     }
+    @PutMapping("updatecmd/{idLigneCommande}")
+    public LigneCommande updateLigneCommande(  @RequestBody DTOLigneCommande dtoLigneCommande,  @PathVariable Long idLigneCommande  ) {
+       return iLigneCommandeService.updateLigneCommande(dtoLigneCommande,idLigneCommande);
+    }
+
 }

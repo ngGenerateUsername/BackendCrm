@@ -49,9 +49,9 @@ public class ProduitController {
     }
 
 
-        @PutMapping("updateProduit/{idProduit}")
-        public Produit updateProduit(@RequestBody  DTOProduit  p ,@PathVariable Long idProduit ){
-            return iProduitService.updateProduit(p,idProduit);
+        @PutMapping("updateProduit")
+        public Produit updateProduit(@RequestBody  DTOProduit  p ){
+            return iProduitService.updateProduit(p);
 
 
     }

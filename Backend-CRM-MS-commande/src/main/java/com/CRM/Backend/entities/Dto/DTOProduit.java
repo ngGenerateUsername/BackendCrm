@@ -5,9 +5,10 @@ import com.CRM.Backend.entities.LigneCommande;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
+import lombok.*;
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @Builder

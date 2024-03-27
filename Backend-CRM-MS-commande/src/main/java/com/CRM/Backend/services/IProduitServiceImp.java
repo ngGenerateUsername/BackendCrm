@@ -78,8 +78,8 @@ public class IProduitServiceImp implements IProduitService {
 
 
     @Override
-    public Produit updateProduit(DTOProduit dtoProduit, Long id) {
-        Produit p = productRepository.findById(id).orElse(null);
+    public Produit updateProduit(DTOProduit dtoProduit) {
+        Produit p = productRepository.findById(dtoProduit.getIdProduit() ).orElse(null);
 
         // Set the category using the provided idCategorie
        Categorie c = categorieRepository.findById(dtoProduit.getIdcategorie()).orElse(null);

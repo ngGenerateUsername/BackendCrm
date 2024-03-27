@@ -11,6 +11,6 @@ public interface ILigneCommandeService {
     public List<DTOLigneCommande> getAllLigneCommande();
     public LigneCommande getById(Long idLigneCommande );
     public void removeLigneCommande(Long idLigneCommande );
-    public LigneCommande updateLigneCommande(LigneCommande ligneCommande);
+    public LigneCommande updateLigneCommande(DTOLigneCommande dtoLigneCommande,Long idLigneCommande);
     public List<DTOLigneCommande> getAllLigneCommandebyuser(Long id);
 }

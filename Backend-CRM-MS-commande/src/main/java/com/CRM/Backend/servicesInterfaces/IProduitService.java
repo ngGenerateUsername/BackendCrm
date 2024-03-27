@@ -16,7 +16,7 @@ public interface IProduitService {
     public void removeProduit(Long idProduit);
     public List<DTOProduitCmd> getAllProduitCMD();
 
-    public Produit updateProduit(DTOProduit dtoProduit, Long id) ;
+    public Produit updateProduit(DTOProduit dtoProduit) ;
 
     public List<DTOProduitCmd> getAllProduitCMDBYCategorie( Long id);
 
