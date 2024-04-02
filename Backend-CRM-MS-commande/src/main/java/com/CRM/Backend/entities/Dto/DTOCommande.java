@@ -5,22 +5,31 @@ import com.CRM.Backend.entities.LigneFacture;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class DTOCommande {
+    private  Long idC;
     private int Num;
-    private LocalDateTime DateCreation;
+    @CreationTimestamp
+    @Column(updatable = false,nullable = false)
+    private LocalDateTime DateCreation = LocalDateTime.now()  ;
     private LocalDateTime DateLivraison;
     private Long idContact;
     private Long IDResponsableStock;
     private String adressCommande;
     private Long TicketId;
     private List<LigneFacture> lignes;
-    private List<LigneCommande> lignesC;
+    private List<DTOLigneCommande> lignesC;
+    private boolean etat;
+
+    private  long prixtotale;
 
 
 }

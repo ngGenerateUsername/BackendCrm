@@ -33,9 +33,9 @@ public class LignedecommandeController {
     public void  Deleteldc(@PathVariable Long idLigneCommande  ){
         iLigneCommandeService.removeLigneCommande(idLigneCommande);
     }
-    @PutMapping("updatecmd/{idLigneCommande}")
-    public LigneCommande updateLigneCommande(  @RequestBody DTOLigneCommande dtoLigneCommande,  @PathVariable Long idLigneCommande  ) {
-       return iLigneCommandeService.updateLigneCommande(dtoLigneCommande,idLigneCommande);
+    @PutMapping("updatecmd")
+    public String updateLigneCommande(  @RequestBody DTOLigneCommande dtoLigneCommande ) {
+       return iLigneCommandeService.updateLigneCommande(dtoLigneCommande);
     }
 
 }

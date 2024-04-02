@@ -18,12 +18,15 @@ import java.util.List;
 @Builder
 public class Commande implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long idC;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Num;
 
     @CreationTimestamp
-    private LocalDateTime DateCreation;
+    @Column(updatable = false,nullable = false)
+    private LocalDateTime DateCreation = LocalDateTime.now()  ;
 
     @CreationTimestamp
     private LocalDateTime DateLivraison;
@@ -35,7 +38,7 @@ public class Commande implements Serializable {
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"commande"})
     private List<LigneFacture> lignes;
-
+    private boolean etat;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"commande"})

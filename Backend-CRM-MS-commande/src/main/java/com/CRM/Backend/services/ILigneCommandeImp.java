@@ -59,7 +59,30 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         return msg;
     }
 
+    @Override
+    public String updateLigneCommande(DTOLigneCommande dtoLigneCommande ) {
+        String msg = new String();
+        LigneCommande ldce = ligneCommandeREpository.findById(dtoLigneCommande.getIdldc()).orElse(null);
+        int  q= ldce.getQte();
+        System.out.println("qte existant "+q);
+        Produit p = productRepository.findById (ldce.getProduit().getIdProduit()).orElse(null);
+        if (p.getQte() < dtoLigneCommande.getQte()) {
+            msg = "Quantité insuffisante";
+        } else {
+            if (q == dtoLigneCommande.getQte()) {
+                ldce.setQte(dtoLigneCommande.getQte());
+                ldce.setPrixTotale(dtoLigneCommande.getQte() * (ldce.getProduit().getPrixAvecTva()));
+                ligneCommandeREpository.save(ldce);
+            } else
+            {       ldce.setQte(dtoLigneCommande.getQte());
+                    ldce.setPrixTotale(dtoLigneCommande.getQte() * (ldce.getProduit().getPrixAvecTva()));
+                    ligneCommandeREpository.save(ldce);
 
+                msg = "qte modifié";
+            }
+            System.out.println("qte commandé " + dtoLigneCommande.getQte());
+        }   return msg;
+    }
 
     @Override
     public List<DTOLigneCommande> getAllLigneCommande() {
@@ -68,6 +91,8 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         List<LigneCommande> liste = ligneCommandeREpository.findAll() ;
         for (LigneCommande p :liste){
             DTOLigneCommande prod = new DTOLigneCommande() ;
+            prod.setIdldc(p.getIdldc());
+            prod.setIdcontact(p.getIdContact());
             prod.setNomproduit(p.getProduit().getNom());
             prod.setQte(p.getQte());
             prod.setPrixTotale(p.getPrixTotale());
@@ -94,17 +119,6 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         ligneCommandeREpository.deleteById(idLigneCommande);
     }
 
-    @Override
-    public LigneCommande updateLigneCommande(DTOLigneCommande dtoLigneCommande,Long idLigneCommande ) {
-        //LigneCommande ldc = new LigneCommande();
-        LigneCommande ldce = ligneCommandeREpository.findById(idLigneCommande).orElse(null);
-        ldce.setQte(dtoLigneCommande.getQte());
-        ldce.setPrixTotale(dtoLigneCommande.getQte()* (ldce.getProduit().getPrixAvecTva()));
-        ligneCommandeREpository.save(ldce);
-
-
-        return ldce;
-    }
 
     @Override
     public List<DTOLigneCommande> getAllLigneCommandebyuser(Long id) {
@@ -112,6 +126,8 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         List<DTOLigneCommande> lcdcmd = new ArrayList<>();
         for (LigneCommande p :liste){
             DTOLigneCommande prod = new DTOLigneCommande() ;
+            prod.setIdldc(p.getIdldc());
+            prod.setIdcontact(p.getIdContact());
             prod.setNomproduit(p.getProduit().getNom());
             prod.setQte(p.getQte());
             prod.setPrixTotale(p.getPrixTotale());
