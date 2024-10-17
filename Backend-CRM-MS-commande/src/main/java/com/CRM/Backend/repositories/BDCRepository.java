@@ -1,0 +1,9 @@
+package com.CRM.Backend.repositories;
+
+import com.CRM.Backend.entities.BonDeCommande;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BDCRepository extends JpaRepository<BonDeCommande,Long> {
+}

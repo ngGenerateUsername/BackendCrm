@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.*;
+
+import java.math.BigInteger;
 import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,8 +24,9 @@ public class DTOProduit {
     private int Qte;
     private int MinQte;
     private Long idcategorie;
-    private Long idEntreprise;
     private List<LigneCommande> lignesC;
+    private Long idEntreprise;
+
 
 
 }

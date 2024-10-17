@@ -14,12 +14,12 @@ public class DTOLigneCommande {
     private int Qte;
     private Double PrixTotale;
    // private Commande commande;
- private Long idproduit;
     private String nomproduit;
     private Long idcontact;
     private  boolean passed  = false;
     private String nom;
-    private double tva;
+        private double tva;
+        private  Long idetse;
 
 
 }

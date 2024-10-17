@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig{/*
-//extends WebSecurityConfigurerAdapter {
+extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 

@@ -141,7 +141,7 @@ public class Produit implements Serializable {
         return IdEntreprise;
     }
 
-    public void setIdEntreprise(Long idEntreprise) {
+    public void setIdEntreprise(Long  idEntreprise) {
         IdEntreprise = idEntreprise;
     }
 

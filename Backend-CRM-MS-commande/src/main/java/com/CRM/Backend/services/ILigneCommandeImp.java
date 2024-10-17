@@ -3,6 +3,7 @@ package com.CRM.Backend.services;
 import com.CRM.Backend.entities.Dto.DTOLigneCommande;
 import com.CRM.Backend.entities.LigneCommande;
 import com.CRM.Backend.entities.Produit;
+//import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.ILigneCommandeService;
@@ -23,39 +24,39 @@ public class ILigneCommandeImp implements ILigneCommandeService {
 
     @Override
     public String addLigneCommande(DTOLigneCommande dtoLigneCommande, Long idProduit,Long idcontact) {
-
         String msg = new String();
         Produit p = productRepository.findById(idProduit).orElse(null);
-        List<LigneCommande> existingItems = ligneCommandeREpository.findByIdContactAndProduit(idcontact, p);
+
+        // Fetch existing items where 'passed' is false
+        List<LigneCommande> existingItems = ligneCommandeREpository.findByIdContactAndProduitAndPassedFalse (idcontact, p);
 
         LigneCommande ldc = new LigneCommande();
         ldc.setIdldc(dtoLigneCommande.getIdldc());
         ldc.setQte(dtoLigneCommande.getQte());
         ldc.setProduit(p);
-        ldc.setIdContact(idcontact );
+        ldc.setIdContact(idcontact);
         ldc.setPrixTotale(p.getPrixAvecTva() * dtoLigneCommande.getQte());
+        ldc.setPassed(false);
+        ldc.setIdetse(dtoLigneCommande.getIdetse());
 
-
-       // if (q > ldc.getQte()) {
-
-            if (!existingItems.isEmpty()) {
-                if (p.getQte() < dtoLigneCommande.getQte()) {
-                    msg="Quantité insuffisante";
-                }else {
+        if (!existingItems.isEmpty()) {
+            if (p.getQte() < dtoLigneCommande.getQte()) {
+                msg = "Quantité insuffisante";
+            } else {
                 LigneCommande existingItem = existingItems.get(0); // Assuming there's only one item per combination
                 existingItem.setQte(existingItem.getQte() + ldc.getQte());
                 existingItem.setPrixTotale(existingItem.getPrixTotale() + (p.getPrixAvecTva() * ldc.getQte()));
                 ligneCommandeREpository.save(existingItem);
-                msg= "Ligne de commande mise à jour";}
+                msg = "Ligne de commande mise à jour";
+            }
+        } else {
+            if (p.getQte() < dtoLigneCommande.getQte()) {
+                msg = "Quantité insuffisante";
             } else {
-                if (p.getQte() < dtoLigneCommande.getQte()) {
-                    msg="Quantité insuffisante";
-                }else {
-                p.setQte(p.getQte() - ldc.getQte());
                 ligneCommandeREpository.save(ldc);
-                msg= "Ligne de commande ajoutée";
-            }}
-      //  }
+                msg = "Ligne de commande ajoutée";
+            }
+        }
         return msg;
     }
 
@@ -139,4 +140,6 @@ public class ILigneCommandeImp implements ILigneCommandeService {
         return lcdcmd;
 
     }
+
+
 }

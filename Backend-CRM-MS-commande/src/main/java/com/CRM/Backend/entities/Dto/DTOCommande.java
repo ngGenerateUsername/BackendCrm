@@ -30,6 +30,7 @@ public class DTOCommande {
     private boolean etat;
 
     private  long prixtotale;
+    private Long idetse;
 
 
 }

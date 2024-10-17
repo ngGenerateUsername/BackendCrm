@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/Lignedecommande")
 public class LignedecommandeController {
     @Autowired
     ILigneCommandeService iLigneCommandeService;
 @PostMapping("AddLDC/{idProduit}/{idcontact}")
-    public String addlignecmd(@RequestBody DTOLigneCommande ldc, @PathVariable Long idProduit ,@PathVariable Long idcontact ){
-    return  iLigneCommandeService.addLigneCommande(ldc,idProduit,idcontact);
+    public String addlignecmd(@RequestBody DTOLigneCommande ldc, @PathVariable Long idProduit ,@PathVariable Long idcontact){
+    return  iLigneCommandeService.addLigneCommande(ldc,idProduit,idcontact );
 }
     @GetMapping("ALLldc")
     public List<DTOLigneCommande> alllignecmd(){

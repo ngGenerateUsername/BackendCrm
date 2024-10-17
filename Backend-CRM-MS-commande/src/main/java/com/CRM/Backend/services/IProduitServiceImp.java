@@ -1,17 +1,22 @@
 package com.CRM.Backend.services;
 
 import com.CRM.Backend.entities.Categorie;
-import com.CRM.Backend.entities.Dto.DTOProduit;
+import com.CRM.Backend.entities.Dto.DTOProduit ;
 import com.CRM.Backend.entities.Dto.DTOProduitCmd;
+import com.CRM.Backend.entities.Notif;
 import com.CRM.Backend.entities.Produit;
 import com.CRM.Backend.repositories.CategorieRepository;
+import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.IProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.management.Notification;
+import java.util.*;
 
 @Service
 
@@ -19,8 +24,17 @@ public class IProduitServiceImp implements IProduitService {
     @Autowired
     CategorieRepository categorieRepository;
     @Autowired
+    NotifRepository  notifRepository ;
+    @Autowired
 
     ProduitRepository productRepository;
+    @Autowired
+    IProduitServiceImp iProduitService;
+    @Autowired
+    private SimpMessagingTemplate template;
+    private final Set<Long> notifiedProducts = new HashSet<>(); // Set to track notified product IDs
+    private final Map<Long, Boolean> criticalProducts = new HashMap<>();
+
     @Override
     public Produit addProduit(DTOProduit dtoProduit,Long IDcategorie ) {
         Produit p =  new Produit();
@@ -47,10 +61,25 @@ public class IProduitServiceImp implements IProduitService {
 
     }
 
+
+
     @Override
-    public List<Produit> getAllProduit() {
-        return productRepository.findAll();
+    public List<Produit> getAllProduit(Long IdEntreprise) {
+        List<Produit> liste = productRepository.findAll();
+
+        List<Produit> liste2 = new ArrayList<>();
+
+        for (Produit p : liste) {
+            if ( p.getIdEntreprise().equals(IdEntreprise)) {
+                liste2.add(p);
+            }
+        }
+
+        return liste2;
     }
+
+
+
 
     @Override
     public void removeProduit(Long idProduit) {
@@ -112,6 +141,49 @@ public class IProduitServiceImp implements IProduitService {
         }
         return listprodcmd;
     }
+/*
+    @Override
+    @Scheduled(fixedRate = 5000)
+    public ResponseEntity<List<String>> available(Long idets) {
+        List<String> notifications = new ArrayList<>();
+        List<Produit> productList = iProduitService.getAllProduit(idets) ;
 
+
+        if (productList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Return no content if no products exist
+        }
+
+        for (Produit p : productList) {
+            boolean isCritical = p.getQte() < p.getMinQte();
+
+            if (isCritical && !criticalProducts.getOrDefault(p.getIdProduit(), false)) {
+                // Product is now critical and wasn't previously critical
+                String notification = "Produit " + p.getNom() +
+                        " avec quantité " + p.getQte() +
+                        " est en état de stock critique";
+
+                notifications.add(notification); // Add the formatted notification to the list
+                    // crud notification
+                Notif f = new Notif();
+                f.setMsg(notification);
+                f.setIDETSE(idets);
+                    notifRepository.save(f);
+                criticalProducts.put(p.getIdProduit(), true);
+            } else if (!isCritical && criticalProducts.getOrDefault(p.getIdProduit(), false)) {
+                // Product was critical but is now no longer critical
+                criticalProducts.put(p.getIdProduit(), false);
+            }
+        }
+
+        if (!notifications.isEmpty()) {
+            // Log notifications for debugging
+            //System.out.println("Notifications Built: " + notifications);
+            // return get all notif (msg +  date  kol 10 sec )
+            return ResponseEntity.ok(notifications); // Return the notifications as a list of strings
+        }
+
+        return ResponseEntity.noContent().build(); // Return no content if no critical products
+    }
+*/
 
 }

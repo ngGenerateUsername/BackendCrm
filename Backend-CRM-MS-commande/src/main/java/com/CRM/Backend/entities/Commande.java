@@ -3,6 +3,7 @@ package com.CRM.Backend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,15 +27,18 @@ public class Commande implements Serializable {
 
     @CreationTimestamp
     @Column(updatable = false,nullable = false)
-    private LocalDateTime DateCreation = LocalDateTime.now()  ;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
 
+    private LocalDateTime DateCreation = LocalDateTime.now()  ;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     @CreationTimestamp
     private LocalDateTime DateLivraison;
     private  long prixtotale;
-    private Long idContact;
+    private Long idClient;
     private Long IDResponsableStock;
     private String adressCommande;
     private Long TicketId;
+    private Long idetse;
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"commande"})
     private List<LigneFacture> lignes;

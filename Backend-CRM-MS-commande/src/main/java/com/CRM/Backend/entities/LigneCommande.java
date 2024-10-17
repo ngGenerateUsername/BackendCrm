@@ -20,7 +20,7 @@ public class LigneCommande implements Serializable {
     private int Qte;
     private Double PrixTotale;
     private Long idContact;
-
+    private Long idetse;
 
     @ManyToOne
     @JoinColumn(name = "IdCommande")

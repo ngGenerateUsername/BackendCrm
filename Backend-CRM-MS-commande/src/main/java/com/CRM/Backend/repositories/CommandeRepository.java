@@ -8,6 +8,8 @@ import java.util.List;
 
 
 @Repository
-public interface CommandeRepository extends JpaRepository<Commande, Long> {
-    List<Commande> findAllByIdContact(Long idContact);
+public interface CommandeRepository extends JpaRepository<Commande,Long> {
+    List<Commande> findAllByIdClient (Long idClient);
+    List<Commande> findAllByIdetse (Long Idetse);
+    Commande findByIdC(Long idCommande);
 }
