@@ -1,15 +1,14 @@
 package com.CRM.Backend.services;
 
-import com.CRM.Backend.entities.Commande;
+import com.CRM.Backend.entities.*;
 import com.CRM.Backend.entities.Dto.DTOCommande;
 import com.CRM.Backend.entities.Dto.DTOLigneCommande;
-import com.CRM.Backend.entities.LigneCommande;
-import com.CRM.Backend.entities.Notif;
-import com.CRM.Backend.entities.Produit;
 import com.CRM.Backend.repositories.CommandeRepository;
 import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
+import com.CRM.Backend.servicesInterfaces.ClientServiceFeignClient;
+import com.CRM.Backend.servicesInterfaces.EntrepriseServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.ILigneCommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +34,8 @@ public class ICommandeServiceImpl implements ICommandeService {
     ProduitRepository productRepository;
     @Autowired
     NotifRepository notifRepository ;
+    @Autowired
+    private ClientServiceFeignClient clientServiceFeignClient;
 
     @Autowired
     IProduitServiceImp iProduitService;
@@ -46,57 +47,7 @@ public class ICommandeServiceImpl implements ICommandeService {
     private final Map<String, Long> idetsCache = new ConcurrentHashMap<>();
 
 
-    /*{
-        DTOCommande c = new DTOCommande();
-        Commande cnew = new Commande();
-        List<LigneCommande>  monpanier =  ligneCommandeREpository.findAllByPassedFalseAndIdContact(idcontact);
-        System.out.println(idcontact);
 
-        String msg = new String();
-     for (LigneCommande lc : monpanier) {
-           //if (dtoLigneCommande.getQte() <  productRepository.findById(dtoLigneCommande.getIdproduit()).orElse(null) .getQte() ){
-               // dtoLigneCommande.setPassed(true);
-             Produit q = productRepository.findById(lc.getProduit().getIdProduit()).orElse(null)  ;
-             int qq = q.getQte();
-             dtoCommande.setPrixtotale((long) (dtoCommande.getPrixtotale()+ lc.getPrixTotale()));
-        if (qq>lc.getQte()){
-              // }
-            cnew.setNum(dtoCommande.getNum());
-            //c.setLignes(dtoCommande.getLignes());
-          cnew.setIdContact(lc.getIdContact());
-            cnew.setDateCreation(dtoCommande.getDateCreation());
-            cnew.setPrixtotale(dtoCommande.getPrixtotale());
-            cnew.setDateLivraison(dtoCommande.getDateLivraison());
-            cnew.setAdressCommande(dtoCommande.getAdressCommande());
-            cnew.setEtat(false);
-            q.setQte(qq- lc.getQte());
-         // cnew.setLignesC(dtoCommande.getLignesC());
-         lc.setPassed(true);
-         lc.setCommande(cnew);
-         commandeRepository.save(cnew);
-
-         ligneCommandeREpository.save(lc);
-         msg="commande made with success";
-            System.out.println(msg);
-
-
-        } else if ((qq<lc.getQte())) {
-            List<Produit> unavailable  =new ArrayList<>();
-            unavailable.add(lc.getProduit());
-            String nom = unavailable.get(0).getNom();
-            msg="failed to make cmd " +nom+ "is out of stock";
-            System.out.println("failed to make cmd " +nom+ "is out of stock");
-        }
-
-
-
-        }
-
-
-        System.out.println(msg);
-
-        return  msg;
-    }*/
     @Override
     public List<Commande> getAllCommande() {
         return null;
@@ -135,6 +86,7 @@ public class ICommandeServiceImpl implements ICommandeService {
         for (LigneCommande lc : monpanier) {
             Produit q = productRepository.findById(lc.getProduit().getIdProduit()).orElse(null);
             int qq = q.getQte();
+            ClientEntity clientDetails = (ClientEntity) clientServiceFeignClient.getClientDetails(lc.getIdContact());
 
             if (qq >= lc.getQte()) {
                 cnew.setNum(dtoCommande.getNum());
@@ -147,6 +99,7 @@ public class ICommandeServiceImpl implements ICommandeService {
                 cnew.setEtat(false);
                 q.setQte(qq - lc.getQte());
                 lc.setPassed(true);
+                cnew.setNomClient(clientDetails.getNomEntreprise());
                 lc.setCommande(cnew);
             }
         }
@@ -210,6 +163,16 @@ public class ICommandeServiceImpl implements ICommandeService {
     public List<Commande> getAllCommandebyidentreprise(Long identreprise) {
         return commandeRepository.findAllByIdetse (identreprise);
 
+    }
+
+    @Override
+    public boolean validate(Long idcmd) {
+        Commande c =  commandeRepository.findByIdC(idcmd);
+        if (c.isEtat() ) {
+            return true;
+        }
+        else
+            return false;
     }
 
 

@@ -11,6 +11,9 @@ import com.CRM.Backend.servicesInterfaces.EntrepriseServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.IBdcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class IBdcServiceImp implements IBdcService {
 @Autowired
@@ -23,6 +26,9 @@ private ClientServiceFeignClient clientServiceFeignClient;
     CommandeRepository commandeRepository;
     @Autowired
     BDCRepository bdcRepository;
+    @Autowired
+    private BDCRepository bDCRepository;
+
     @Override
     public String addbdc(Long idcmd) {
        Commande c = commandeRepository.findByIdC(idcmd);
@@ -37,8 +43,20 @@ private ClientServiceFeignClient clientServiceFeignClient;
              bdc.setNomClient(clientDetails.getNomEntreprise());
              bdc.setPrice(c.getPrixtotale());
              bdc.setNomentreprise(e.getNomEntreprise());
+             bdc.setIdcmd(idcmd);
+             bdc.setIdetse(c.getIdetse());
              c.setEtat(true);
         bdcRepository.save(bdc);
         return ("commande  validé");}
+    }
+
+    @Override
+    public List<BonDeCommande> getallbdc( Long idetse) {
+        return bdcRepository.findAllByIdetse(idetse);
+    }
+
+    @Override
+    public BonDeCommande getbdcbyid(Long idbdc) {
+        return bdcRepository.findById(idbdc).get();
     }
 }

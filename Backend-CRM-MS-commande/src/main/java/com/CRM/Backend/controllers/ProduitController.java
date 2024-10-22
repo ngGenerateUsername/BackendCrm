@@ -9,6 +9,7 @@ import com.CRM.Backend.servicesInterfaces.ICommandeService;
 import com.CRM.Backend.servicesInterfaces.IProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Validated
+//@Validated
 @CrossOrigin(origins = "*")
 
 @RequestMapping("/api/Produit")
@@ -27,7 +28,9 @@ public class ProduitController {
     ProduitRepository produitRepository;
     @Autowired
     ICommandeService iCommandeService;
-    @PostMapping("addproduit/{IDcategorie}")
+
+
+    @PostMapping( value = "addproduit/{IDcategorie}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Produit addProduit(@RequestBody DTOProduit dtoProduit , @PathVariable Long IDcategorie) {
         return iProduitService.addProduit(dtoProduit,IDcategorie );
 

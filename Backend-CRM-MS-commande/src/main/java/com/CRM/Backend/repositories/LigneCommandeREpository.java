@@ -1,6 +1,7 @@
 package com.CRM.Backend.repositories;
 
 
+import com.CRM.Backend.entities.Commande;
 import com.CRM.Backend.entities.LigneCommande;
 import com.CRM.Backend.entities.Produit;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,5 @@ public interface LigneCommandeREpository extends JpaRepository<LigneCommande,Lon
 
     List<LigneCommande> findByIdContactAndProduit(Long idContact, Produit produit);
     List<LigneCommande> findByIdContactAndProduitAndPassedFalse(Long idContact, Produit produit);
-
-
+    List<LigneCommande> findAllByCommande(Commande commande);
 }

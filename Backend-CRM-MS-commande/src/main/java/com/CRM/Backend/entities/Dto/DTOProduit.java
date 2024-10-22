@@ -24,7 +24,7 @@ public class DTOProduit {
     private int Qte;
     private int MinQte;
     private Long idcategorie;
-    private List<LigneCommande> lignesC;
+   // private List<LigneCommande> lignesC;
     private Long idEntreprise;
 
 

@@ -6,6 +6,7 @@ import com.CRM.Backend.entities.Commande;
 import com.CRM.Backend.entities.Dto.DTOCommande;
 import com.CRM.Backend.entities.Dto.DTOLigneCommande;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import com.CRM.Backend.servicesInterfaces.ICommandeService;
@@ -23,10 +24,11 @@ public class CommandeController {
     }
 
 
-    @PostMapping("addcommand/{idClient}/{idetse}")
-    public String addcommand(@RequestBody DTOCommande  dtoCommande, @PathVariable Long idClient ,@PathVariable  Long idetse){
-        return  iCommandeService.addCommande(dtoCommande, idClient,idetse);
+    @PostMapping(value = "addcommand/{idClient}/{idetse}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String addcommand(@RequestBody DTOCommande dtoCommande, @PathVariable Long idClient, @PathVariable Long idetse) {
+        return iCommandeService.addCommande(dtoCommande, idClient, idetse);
     }
+
     @GetMapping("getcommanddetails/{idCmd}")
     public List<DTOLigneCommande> cmddetails(@PathVariable Long idCmd ){
         return  iCommandeService.getcommanddetails(idCmd);
@@ -36,5 +38,9 @@ public class CommandeController {
     @GetMapping("getalletsecommande/{identreprise}")
     public List<Commande> cmdetse(@PathVariable Long identreprise ){
         return  iCommandeService.getAllCommandebyidentreprise (identreprise);
+    }
+    @GetMapping("validate/{idcmd}")
+    public boolean validate(@PathVariable Long idcmd ){
+        return  iCommandeService.validate(idcmd);
     }
 }

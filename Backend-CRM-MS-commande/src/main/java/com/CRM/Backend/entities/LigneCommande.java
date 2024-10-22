@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @Builder
 public class LigneCommande implements Serializable {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long idldc;
 

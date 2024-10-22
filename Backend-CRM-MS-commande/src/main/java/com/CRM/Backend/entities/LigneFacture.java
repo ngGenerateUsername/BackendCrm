@@ -1,6 +1,7 @@
 package com.CRM.Backend.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,20 +26,24 @@ public class LigneFacture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "Idcommande")
+    @JsonBackReference  // Prevents recursion for 'commande'
     private Commande commande;
 
     @ManyToOne
     @JoinColumn(name = "IdFacture")
+    @JsonBackReference  // Prevents recursion for 'facture'
     private Facture facture;
-    @JsonIgnoreProperties(value = {"lignes"})
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    private   LocalDateTime DateCreation;
-    private double prixHT;
-    private double prixHTTC;
-
-
+    private int qte;
+    private String nom;
+    private String cat;
+    private Double tva;
+    private String ref;
+    private double UprixHT;
+    private double UprixTTC;
+    private double totaleprixHT;
+    private double totaleprixTTC;
 }

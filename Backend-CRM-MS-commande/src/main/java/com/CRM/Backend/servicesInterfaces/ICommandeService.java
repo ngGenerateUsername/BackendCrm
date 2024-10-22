@@ -19,7 +19,7 @@ public interface ICommandeService {
     public List<Commande> getAllCommandebyuser(Long idClient );
     public List<DTOLigneCommande>  getcommanddetails(Long idcmd);
     public List<Commande> getAllCommandebyidentreprise(Long identreprise);
-
+public boolean validate (Long idcmd);
     //public ResponseEntity<List<String>> available( );
 
     public void scheduledCheck();

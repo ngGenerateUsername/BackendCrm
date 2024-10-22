@@ -25,12 +25,13 @@ public class DTOCommande {
     private Long IDResponsableStock;
     private String adressCommande;
     private Long TicketId;
-    private List<LigneFacture> lignes;
-    private List<DTOLigneCommande> lignesC;
+    //private List<LigneFacture> lignes;
+    //private List<DTOLigneCommande> lignesC;
     private boolean etat;
 
     private  long prixtotale;
     private Long idetse;
 
-
+    private String nomClient;
 }
+

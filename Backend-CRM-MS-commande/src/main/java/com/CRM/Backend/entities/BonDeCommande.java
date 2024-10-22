@@ -27,4 +27,6 @@ public class BonDeCommande implements Serializable {
     private String AdressLivraison;
     private  Long price;
     private String nomentreprise;
+    private Long idcmd;
+    private Long idetse;
 }

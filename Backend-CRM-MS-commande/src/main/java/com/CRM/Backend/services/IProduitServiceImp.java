@@ -51,7 +51,7 @@ public class IProduitServiceImp implements IProduitService {
         p.setIdEntreprise(dtoProduit.getIdEntreprise());
 
         p.setPrixAvecTva(dtoProduit.getPrixInitial() * (1 + categorie.getTva() / 100));
-        p.setLignesC(dtoProduit.getLignesC());
+        //p.setLignesC(dtoProduit.getLignesC());
         return productRepository.save(p);
     }
 
