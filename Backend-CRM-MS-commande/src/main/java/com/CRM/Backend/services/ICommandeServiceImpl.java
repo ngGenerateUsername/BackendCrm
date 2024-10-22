@@ -93,7 +93,7 @@ public class ICommandeServiceImpl implements ICommandeService {
                 cnew.setIdClient(lc.getIdContact());
                 cnew.setDateCreation(dtoCommande.getDateCreation());
                 cnew.setPrixtotale(dtoCommande.getPrixtotale());
-               // cnew.setAdressCommande(dtoCommande.getAdressCommande());
+                    cnew.setAdressCommande(dtoCommande.getAdressCommande());
                 cnew.setIdetse(idetse);
 
                 cnew.setEtat(false);
