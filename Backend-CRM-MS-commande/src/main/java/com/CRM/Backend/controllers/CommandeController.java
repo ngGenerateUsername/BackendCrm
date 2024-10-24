@@ -43,4 +43,9 @@ public class CommandeController {
     public boolean validate(@PathVariable Long idcmd ){
         return  iCommandeService.validate(idcmd);
     }
+
+    @GetMapping("validatef/{idcmd}")
+    public boolean validatef(@PathVariable Long idcmd ){
+        return  iCommandeService.validatef(idcmd);
+    }
 }

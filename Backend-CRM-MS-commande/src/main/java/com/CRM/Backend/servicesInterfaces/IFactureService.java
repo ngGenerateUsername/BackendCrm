@@ -11,10 +11,14 @@ import java.util.List;
 
 public interface IFactureService {
     public Facture addFacture(DTOFacture dtoFacture);
-    public List<Facture> getAllFacture();
+    public List<Facture> getAllFacturebyidetse(Long id);
+
+    List<Facture> getAllFacture();
+
     public Facture getById(Long idacture );
     public void removeFacture(Long idacture );
     public Facture updateFacture(DTOFacture dtoFacture);
 
     public ResponseEntity cratelf(Long idcmd);
+    public List<LigneFacture> getAllLigneFacture(Long idcmd);
 }

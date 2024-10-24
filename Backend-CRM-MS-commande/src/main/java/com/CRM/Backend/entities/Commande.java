@@ -1,8 +1,7 @@
 package com.CRM.Backend.entities;
 
-import com.CRM.Backend.entities.LigneCommande;
-import com.CRM.Backend.entities.LigneFacture;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 
@@ -13,13 +12,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -51,6 +48,7 @@ public class Commande implements Serializable {
     private Long TicketId;
     private Long idetse;
     private boolean etat;
+    private boolean etatf;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"facture"})
@@ -59,6 +57,7 @@ public class Commande implements Serializable {
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"commande"})
     private List<LigneCommande> lignesC;
+
 
     private String nomClient;
 }

@@ -42,7 +42,7 @@ public class CategroieController {
         return iCategorieService.getAllCategorie();
 }
 @DeleteMapping("{idcategorie}")
-    public ResponseEntity removeCategory (@PathVariable Long idcategorie ){
+        public ResponseEntity removeCategory (@PathVariable Long idcategorie ){
         Categorie categorie = iCategorieService.getById(idcategorie);
     if (categorie == null) {
         return ResponseEntity.notFound().build();

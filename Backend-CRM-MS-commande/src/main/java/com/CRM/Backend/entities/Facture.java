@@ -36,6 +36,10 @@ public class Facture implements Serializable {
     private double montantTotalHTTC;
     private Long idClient;
     private Long idCommercial;
+private String nomClient;
+private String nomentreprise;
+private Long idetse;
+
 
     @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"facture"})

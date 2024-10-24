@@ -1,14 +1,13 @@
 package com.CRM.Backend.services;
 
-import com.CRM.Backend.entities.Commande;
+import com.CRM.Backend.entities.*;
 import com.CRM.Backend.entities.Dto.DTOFacture;
-import com.CRM.Backend.entities.Facture;
-import com.CRM.Backend.entities.LigneCommande;
-import com.CRM.Backend.entities.LigneFacture;
 import com.CRM.Backend.repositories.CommandeRepository;
 import com.CRM.Backend.repositories.FactureRepository;
 import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.LigneFactureRepository;
+import com.CRM.Backend.servicesInterfaces.ClientServiceFeignClient;
+import com.CRM.Backend.servicesInterfaces.EntrepriseServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.IFactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +27,11 @@ public class IFactureServiceiMP implements IFactureService {
     LigneCommandeREpository ligneCommandeRepository;
     @Autowired
     private LigneFactureRepository ligneFactureRepository;
+    @Autowired
+    private ClientServiceFeignClient clientServiceFeignClient;
+    @Autowired
+    private EntrepriseServiceFeignClient entrepriseServiceFeignClient;
+
 
     @Override
     public Facture addFacture(DTOFacture dtoFacture) {
@@ -37,13 +41,19 @@ public class IFactureServiceiMP implements IFactureService {
     }
 
     @Override
+    public List<Facture> getAllFacturebyidetse(Long id) {
+    return   factureRepository.findAllByIdetse(id);
+
+    }
+
+    @Override
     public List<Facture> getAllFacture() {
         return null;
     }
 
     @Override
     public Facture getById(Long idacture) {
-        return null;
+        return factureRepository.getFactureById(idacture);
     }
 
     @Override
@@ -66,9 +76,12 @@ public class IFactureServiceiMP implements IFactureService {
 
         List<LigneCommande> lc = ligneCommandeRepository.findAllByCommande(c);
         Facture f = new Facture();
-
+        Double x = 0.0;
+        Double y = 0.0;
+        c.setEtatf(true);
         factureRepository.save(f);
     for (int i = 0; i < lc.size(); i++) {
+
             LigneFacture lf = new LigneFacture();
             LigneCommande l =  lc.get(i);
             lf.setCat(l.getProduit().getCategorie().getNom());
@@ -79,13 +92,33 @@ public class IFactureServiceiMP implements IFactureService {
             lf.setUprixHT(l.getProduit().getPrixInitial());
             lf.setUprixTTC(l.getProduit().getPrixAvecTva());
             lf.setTotaleprixTTC(l.getPrixTotale());
-           // lf.setTotaleprixHT()
+            x=x+l.getPrixTotale();
+            y=y+l.getProduit().getPrixInitial()*l.getQte();
+            lf.setTotaleprixHT(l.getProduit().getPrixInitial()*l.getQte());
             lf.setCommande(c);
             lf.setFacture(f);
-             ligneFactureRepository.save(lf) ;
+
+        ligneFactureRepository.save(lf) ;
 
         }
+        f.setMontantTotalHT(x);
+        f.setMontantTotalHTTC(y);
+        ClientEntity clientDetails = (ClientEntity) clientServiceFeignClient.getClientDetails(c.getIdClient());
+        Entreprise e = entrepriseServiceFeignClient.getEntrepriseDetails(c.getIdetse());
+        f.setIdetse(c.getIdetse());
+        System.out.println(e.getId());
+        f.setNomClient(clientDetails.getNomEntreprise());
+        f.setNomentreprise(e.getNomEntreprise());
+        factureRepository.save(f);
 
         return ResponseEntity.status(HttpStatus.OK).body(lc);
+    }
+
+    @Override
+    public List<LigneFacture> getAllLigneFacture(Long idf) {
+          Facture f=  factureRepository.findById(idf).get();
+    return ligneFactureRepository.findAllByFacture(f);
+
+
     }
 }

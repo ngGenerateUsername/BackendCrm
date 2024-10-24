@@ -28,6 +28,8 @@ public class DTOCommande {
     //private List<LigneFacture> lignes;
     //private List<DTOLigneCommande> lignesC;
     private boolean etat;
+    private boolean etatf;
+
 
     private  long prixtotale;
     private Long idetse;

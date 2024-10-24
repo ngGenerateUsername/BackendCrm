@@ -22,6 +22,8 @@ public interface ICommandeService {
 public boolean validate (Long idcmd);
     //public ResponseEntity<List<String>> available( );
 
+    boolean validatef(Long idcmd);
+
     public void scheduledCheck();
 
     // Method triggered by REST API to accept dynamic idets from the frontend

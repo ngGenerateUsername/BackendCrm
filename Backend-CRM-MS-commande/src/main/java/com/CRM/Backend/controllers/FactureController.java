@@ -1,15 +1,17 @@
 package com.CRM.Backend.controllers;
 
-import com.CRM.Backend.entities.Dto.DTOFacture;
 import com.CRM.Backend.entities.Facture;
+import com.CRM.Backend.entities.LigneFacture;
 import com.CRM.Backend.servicesInterfaces.IFactureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/categorie")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/")
 public class FactureController {
     @Autowired
     IFactureService iFactureService;
@@ -20,4 +22,23 @@ public class FactureController {
         return iFactureService.cratelf(idcmd);
 
     }
+
+    @GetMapping("getalllc/{idcmd}")
+    public List<LigneFacture> getAllFacture(@PathVariable Long idcmd) {
+        return iFactureService.getAllLigneFacture(idcmd);
+    }
+
+
+    @GetMapping("getallfacture/{idetse}")
+    public List<Facture> getAllFacturebyetse(@PathVariable Long idetse) {
+        return iFactureService.getAllFacturebyidetse(idetse);
+    }
+
+    @GetMapping("getfacture/{idf}")
+    public Facture getFacturebyid(@PathVariable Long idf) {
+        return iFactureService.getById(idf);
+    }
+
+
+
 }

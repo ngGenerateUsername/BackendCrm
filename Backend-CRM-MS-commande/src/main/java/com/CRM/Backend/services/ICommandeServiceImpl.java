@@ -8,7 +8,6 @@ import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.ClientServiceFeignClient;
-import com.CRM.Backend.servicesInterfaces.EntrepriseServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.ILigneCommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -97,6 +96,7 @@ public class ICommandeServiceImpl implements ICommandeService {
                 cnew.setIdetse(idetse);
 
                 cnew.setEtat(false);
+                cnew.setEtatf(false);
                 q.setQte(qq - lc.getQte());
                 lc.setPassed(true);
                 cnew.setNomClient(clientDetails.getNomEntreprise());
@@ -175,7 +175,15 @@ public class ICommandeServiceImpl implements ICommandeService {
             return false;
     }
 
-
+    @Override
+    public boolean validatef(Long idcmd) {
+        Commande c =  commandeRepository.findByIdC(idcmd);
+        if (c.isEtatf() ) {
+            return true;
+        }
+        else
+            return false;
+    }
     @Scheduled(fixedRate = 6000)
     @Override
     public void scheduledCheck() {
