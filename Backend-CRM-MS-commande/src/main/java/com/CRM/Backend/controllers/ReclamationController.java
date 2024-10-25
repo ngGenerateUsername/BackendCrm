@@ -30,5 +30,18 @@ public List<Reclamation> getReclamationCmd(@PathVariable Long idcmd){
 
     }
 
+    @GetMapping(value = "getreclamationclt/{idclt}")
+    public List<Reclamation> getReclamationclt(@PathVariable Long idclt){
+        return reclamationService.getReclamationByidclt(idclt);
+
+    }
+
+    @PutMapping(value = "update/{idrec}/{idcomer}")
+    public Reclamation update(@RequestBody Reclamation r, @PathVariable Long idrec,@PathVariable Long idcomer ){
+        return reclamationService.updatereclmation( r,idrec,idcomer ) ;
+
+    }
+
+
 }
 

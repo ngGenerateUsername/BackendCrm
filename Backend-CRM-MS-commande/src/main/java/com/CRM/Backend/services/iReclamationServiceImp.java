@@ -55,10 +55,12 @@ return   reclamationRepository.findAllByIdcltIs (idclt);
     }
 
     @Override
-    public Reclamation updatereclmation(Reclamation R, Long idr) {
+    public Reclamation updatereclmation(Reclamation R, Long idr ,Long idcom) {
      Reclamation r = reclamationRepository.findById(idr).get();
     r.setDateTraitement( LocalDateTime.now());
-    r.setReponse(r.getReponse());
+    r.setReponse( R.getReponse());
+    r.setStatus(status.traité);
+    r.setIdcomer(idcom);
     return reclamationRepository.save(r);
     }
 }
