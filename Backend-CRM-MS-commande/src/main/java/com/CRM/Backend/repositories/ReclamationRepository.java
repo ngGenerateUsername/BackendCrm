@@ -12,4 +12,5 @@ public interface ReclamationRepository extends JpaRepository<Reclamation, Long> 
     public List<Reclamation>  findAllByIdcltIs(Long idcltIs) ;
     public List<Reclamation> findAllByIdcmdIs(Long idcmdIs) ;
 
+    public List<Reclamation> findAllByidtese(Long idtese) ;
 }

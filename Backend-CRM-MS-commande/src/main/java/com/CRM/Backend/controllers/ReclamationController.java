@@ -30,9 +30,9 @@ public List<Reclamation> getReclamationCmd(@PathVariable Long idcmd){
 
     }
 
-    @GetMapping(value = "getreclamationclt/{idclt}")
-    public List<Reclamation> getReclamationclt(@PathVariable Long idclt){
-        return reclamationService.getReclamationByidclt(idclt);
+        @GetMapping(value = "getreclamationetse/{idetse}")
+    public List<Reclamation> getReclamationetse(@PathVariable Long idetse){
+        return reclamationService.getReclamationByidetse(idetse);
 
     }
 

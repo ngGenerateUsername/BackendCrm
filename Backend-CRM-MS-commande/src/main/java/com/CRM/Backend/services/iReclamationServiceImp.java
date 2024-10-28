@@ -35,6 +35,7 @@ public class iReclamationServiceImp implements IReclamationService {
         r.setIdclt(clientDetails.getIdClient());
         r.setStatus(status.en_cours_de_traitement);
         r.setNomcleint(clientDetails.getNomEntreprise());
+        r.setIdtese(c.getIdetse());
         return reclamationRepository.save(r);
     }
 
@@ -47,6 +48,12 @@ public class iReclamationServiceImp implements IReclamationService {
     @Override
     public List<Reclamation> getReclamationByidclt(Long idclt) {
 return   reclamationRepository.findAllByIdcltIs (idclt);
+    }
+
+    @Override
+    public List<Reclamation> getReclamationByidetse(Long etse) {
+        return   reclamationRepository.findAllByidtese(etse);
+
     }
 
     @Override

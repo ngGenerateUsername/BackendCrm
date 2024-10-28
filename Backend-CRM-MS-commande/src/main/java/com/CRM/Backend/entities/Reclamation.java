@@ -22,6 +22,7 @@ public class Reclamation implements Serializable {
 
      private Long idcmd ;
 private Long idclt;
+private Long idtese;
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
     private LocalDateTime dateCreation = LocalDateTime.now();
