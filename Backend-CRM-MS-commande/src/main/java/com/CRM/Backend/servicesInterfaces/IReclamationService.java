@@ -14,5 +14,5 @@ public interface IReclamationService {
 
     public Reclamation getReclamationById(Long id);
 
-    Reclamation updatereclmation(Reclamation R, Long idr,Long idcom );
+    Reclamation updatereclmation(Reclamation R, Long idr );
 }

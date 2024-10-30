@@ -265,4 +265,9 @@ public class ICommandeServiceImpl implements ICommandeService {
     List<Notif> notifs = notifRepository.findAll();
     return  notifs;
     }
+
+    @Override
+    public Notif getnotifbyid(Long id) {
+        return notifRepository.findById(id).get();
+    }
 }

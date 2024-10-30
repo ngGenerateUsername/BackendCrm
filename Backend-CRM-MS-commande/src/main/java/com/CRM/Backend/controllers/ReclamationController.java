@@ -29,16 +29,20 @@ public List<Reclamation> getReclamationCmd(@PathVariable Long idcmd){
         return reclamationService.getReclamationByidcmd(idcmd);
 
     }
+    @GetMapping(value = "getreclamationclt/{idclt}")
+    public List<Reclamation> getReclamationclt(@PathVariable Long idclt){
+        return reclamationService.getReclamationByidclt(idclt);
 
+    }
         @GetMapping(value = "getreclamationetse/{idetse}")
     public List<Reclamation> getReclamationetse(@PathVariable Long idetse){
         return reclamationService.getReclamationByidetse(idetse);
 
     }
 
-    @PutMapping(value = "update/{idrec}/{idcomer}")
-    public Reclamation update(@RequestBody Reclamation r, @PathVariable Long idrec,@PathVariable Long idcomer ){
-        return reclamationService.updatereclmation( r,idrec,idcomer ) ;
+    @PutMapping(value = "updatereclamation/{idrec}")
+    public Reclamation update(@RequestBody Reclamation r, @PathVariable Long idrec ){
+        return reclamationService.updatereclmation( r,idrec ) ;
 
     }
 

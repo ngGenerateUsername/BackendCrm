@@ -31,9 +31,9 @@ private Long idtese;
     private LocalDateTime dateTraitement  ;
     @Enumerated(EnumType.STRING)
     private status status;
-private String description;
-private String reponse ;
-private Long idcomer;
-private String nomcleint;
+    private String description;
+    private String reponse ;
+    private Long idcomer;
+    private String nomcleint;
 
 }

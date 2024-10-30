@@ -5,6 +5,7 @@ import java.util.List;
 import com.CRM.Backend.entities.Commande;
 import com.CRM.Backend.entities.Dto.DTOCommande;
 import com.CRM.Backend.entities.Dto.DTOLigneCommande;
+import com.CRM.Backend.entities.Notif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,12 @@ public class CommandeController {
     @GetMapping("validatef/{idcmd}")
     public boolean validatef(@PathVariable Long idcmd ){
         return  iCommandeService.validatef(idcmd);
+    }
+
+
+    @GetMapping("getnotifbyid/{idn}")
+    public Notif getnotifbyid (@PathVariable Long  idn){
+
+        return  iCommandeService.getnotifbyid(idn);
     }
 }
