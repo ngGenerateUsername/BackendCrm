@@ -23,6 +23,17 @@ public class Notif implements Serializable {
 
     private Long idProduit;
 
+
+
+    private boolean clickable = true ;
+
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
+    }
     public Long getIDproduit() {
         return idProduit;
     }

@@ -16,6 +16,8 @@ public interface IProduitService {
     public List<DTOProduitCmd> getAllProduitCMD();
 
     public Produit updateProduit(DTOProduit dtoProduit) ;
+    public String getnometse( Long idprod ) ;
+
 
     public List<DTOProduitCmd> getAllProduitCMDBYCategorie( Long id);
     //public ResponseEntity<List<String>> available(Long idets);

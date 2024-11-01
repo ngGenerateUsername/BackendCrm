@@ -8,6 +8,7 @@ import com.CRM.Backend.repositories.LigneCommandeREpository;
 import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.ClientServiceFeignClient;
+import com.CRM.Backend.servicesInterfaces.IAOService;
 import com.CRM.Backend.servicesInterfaces.ILigneCommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,11 @@ public class ICommandeServiceImpl implements ICommandeService {
     private ClientServiceFeignClient clientServiceFeignClient;
 
     @Autowired
+    private IAOService iaoService;
+    @Autowired
     IProduitServiceImp iProduitService;
+
+
     @Autowired
     private SimpMessagingTemplate template;
     private final Set<Long> notifiedProducts = new HashSet<>(); // Set to track notified product IDs
@@ -197,36 +202,28 @@ public class ICommandeServiceImpl implements ICommandeService {
     public ResponseEntity<List<String>> available( ) {
         List<String> notifications = new ArrayList<>();
         List<Produit> productList = productRepository.findAll();
-
         if (productList.isEmpty()) {
             return ResponseEntity.noContent().build(); // Return no content if no products exist
         }
-
         for (Produit p : productList) {
             boolean isCritical = p.getQte() < p.getMinQte();
+            System.out.println( iaoService.findByIdproduitAndEtat(p.getIdProduit()));
 
-            // Check if the product is critical and hasn't been notified before
-            if (isCritical && !criticalProducts.getOrDefault(p.getIdProduit(), false)) {
-                // Query the database to check if a notification for this product already exists
+            if (isCritical && !criticalProducts.getOrDefault(p.getIdProduit(), false )) {
                 Optional<Notif> existingNotif = notifRepository.findByIdProduit(p.getIdProduit());
-
-                if (!existingNotif.isPresent()) {
-                    // If no notification exists, create a new one
+                if (!existingNotif.isPresent() ){
                     String notification = "Produit " + p.getNom() +
                             " avec quantité " + p.getQte() +
-                            " est en état de stock critique";
-
+                            " est en état de stock critique ";
                     notifications.add(notification); // Add the formatted notification to the list
-
-                    // Save notification in the repository
                     Notif notif = new Notif();
                     notif.setMsg(notification);
                     notif.setIDETSE(p.getIdEntreprise());
                     notif.setIDproduit(p.getIdProduit()); // Track the product ID in the notification
                     notifRepository.save(notif);
-
                     criticalProducts.put(p.getIdProduit(), true);
                 }
+
             }
             // If the product is no longer critical and was marked as critical, delete the notification
             else if (!isCritical && criticalProducts.getOrDefault(p.getIdProduit(), false)) {
@@ -242,7 +239,7 @@ public class ICommandeServiceImpl implements ICommandeService {
             if (p.getQte() > p.getMinQte()) {
                 // Check if there's a notification for this product in the database
                 Optional<Notif> existingNotif = notifRepository.findByIdProduit(p.getIdProduit());
-                if (existingNotif.isPresent()) {
+                if (existingNotif.isPresent()  ) {
                     // Delete the notification since the product is no longer critical
                     notifRepository.delete(existingNotif.get());
                 }

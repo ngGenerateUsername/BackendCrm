@@ -8,6 +8,7 @@ import com.CRM.Backend.entities.Produit;
 import com.CRM.Backend.repositories.CategorieRepository;
 import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
+import com.CRM.Backend.servicesInterfaces.EntrepriseServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.IProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class IProduitServiceImp implements IProduitService {
     @Autowired
 
     ProduitRepository productRepository;
+
+
+    @Autowired
+
+    EntrepriseServiceFeignClient entrepriseServiceFeignClient ;
     @Autowired
     IProduitServiceImp iProduitService;
     @Autowired
@@ -122,6 +128,12 @@ public class IProduitServiceImp implements IProduitService {
         p.setPrixAvecTva(dtoProduit.getPrixInitial() * (1 + c.getTva() / 100));
 
         return productRepository.save(p);
+    }
+
+    @Override
+    public String getnometse(Long idprod) {
+
+     return entrepriseServiceFeignClient.getEntrepriseDetails( productRepository.findById(idprod).get().getIdEntreprise()).getNomEntreprise()   ;
     }
 
     @Override

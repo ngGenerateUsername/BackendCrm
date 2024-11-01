@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -25,19 +26,21 @@ public class Appeloffre implements Serializable {
     @CreationTimestamp
     @Column(updatable = false,nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime  DatePublication  = LocalDateTime.now();;
+    private LocalDateTime  DatePublication  = LocalDateTime.now();
 
-    @CreationTimestamp
-    @Column(updatable = false,nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime  DateCloture ;
-    private int  quantité ;
+    @Temporal(TemporalType.DATE)
+    private Date dateCloture ;
+
+    private int  quantite ;
     private Long idf;
     private Long idcom;
     private String nometse;
     private Long idproduit;
     private String categorie;
-
+    @Enumerated(EnumType.STRING)
+    private etatAO etat;
+    private  String nomprod;
+    private double tva;
 
 
 }

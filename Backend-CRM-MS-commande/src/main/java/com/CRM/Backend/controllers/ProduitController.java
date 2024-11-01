@@ -56,7 +56,7 @@ public class ProduitController {
         return new ResponseEntity<>("Le produit a été supprimé avec succès!", HttpStatus.OK);
     }
 
-    @GetMapping("/{idProduit}")
+    @GetMapping("produitdetaille/{idProduit}")
     public Produit findProduitById(@PathVariable Long idProduit) {
 
         return iProduitService.getById(idProduit);
