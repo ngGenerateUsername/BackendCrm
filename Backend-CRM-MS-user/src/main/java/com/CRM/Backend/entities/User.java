@@ -30,7 +30,7 @@ public abstract class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long idUser;
+        Long idUser;
 	
 	String image;
 	String mail;

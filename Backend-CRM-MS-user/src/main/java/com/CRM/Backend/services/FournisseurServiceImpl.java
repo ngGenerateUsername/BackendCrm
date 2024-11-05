@@ -1,10 +1,9 @@
 package com.CRM.Backend.services;
 
-import com.CRM.Backend.entities.Entreprise;
+import com.CRM.Backend.entities.Fournisseur;
 import com.CRM.Backend.entities.StatusUser;
-import com.CRM.Backend.entities.dto.DtoEntreprise;
-import com.CRM.Backend.repositories.EntrepriseRepository;
-import com.CRM.Backend.servicesInterfaces.IEntrepriseService;
+import com.CRM.Backend.repositories.FournisseurRepository;
+import com.CRM.Backend.servicesInterfaces.IFournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +12,24 @@ import java.util.List;
 
 
 @Service
-public class FournisseurServiceImpl implements IEntrepriseService {
+public class FournisseurServiceImpl implements IFournisseurService {
    
 	@Autowired
-	EntrepriseRepository entrepriseRepository;
+	FournisseurRepository FournisseurRepository;
 
-    public List<Entreprise> retrieveAllentreprises() {
-		return entrepriseRepository.findAll();
+    public List<Fournisseur> retrieveAllFournisseurs() {
+		return FournisseurRepository.findAll();
 	}
 
-    public Entreprise ajoutEentreprise(Entreprise e) {
+    public Fournisseur ajoutFournisseur(Fournisseur e) {
 		e.setStatusUser(StatusUser.ACTIF);
 		e.setImage("company.png");
-		return entrepriseRepository.save(e);
+		return FournisseurRepository.save(e);
 	}	
 
-	public Entreprise updateEntreprise(DtoEntreprise cc) {
+	public Fournisseur updateFournisseur(Fournisseur cc) {
 		try {
-			Entreprise ccc = entrepriseRepository.findById(cc.getIdUser()).get();
+			Fournisseur ccc = FournisseurRepository.findById(cc.getIdUser()).get();
 
 			if(cc.getCA() != null){
 				ccc.setCA(cc.getCA());
@@ -48,8 +47,8 @@ public class FournisseurServiceImpl implements IEntrepriseService {
 				ccc.setNumFiscal(cc.getNumFiscal());
 				ccc.setDateModification(new Date());
 			}
-			if(cc.getNomEntreprise() != null){
-				ccc.setNomEntreprise(cc.getNomEntreprise());
+			if(cc.getNomFournisseur() != null){
+				ccc.setNomFournisseur(cc.getNomFournisseur());
 				ccc.setDateModification(new Date());
 			}
 			if(cc.getAdresse() != null){
@@ -68,14 +67,14 @@ public class FournisseurServiceImpl implements IEntrepriseService {
 				ccc.setDateCreation(cc.getDateCreation());
 				ccc.setDateModification(new Date());
 			}
-			return entrepriseRepository.save(ccc);
+			return FournisseurRepository.save(ccc);
 		}
 		catch(Exception e) {
 			return null;
 		}
 	}
 
-    public Entreprise EentrepriseDetails(Long id) {
-		return entrepriseRepository.findById(id).get();
+    public Fournisseur FournisseurDetails(Long id) {
+		return FournisseurRepository.findById(id).get();
 	}
 }

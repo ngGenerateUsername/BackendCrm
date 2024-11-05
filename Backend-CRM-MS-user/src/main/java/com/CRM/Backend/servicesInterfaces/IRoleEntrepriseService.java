@@ -22,6 +22,7 @@ public interface IRoleEntrepriseService {
     public Contact retrievePropPerEntreprise(Long id);
     public Entreprise retrieveEntreprisePercontatc(Long id);
     public List<Contact> retrievecontactsPerEntreprise(Long id);
+    public List<Contact> retrievecontactsPerFournisseur(Long id);
     public Entreprise retrieveEntreprisesPerProp(Long id);
     public List<Contact> retrieveCommercialPerEntreprise(Long id);
     public List<Contact> retrieveRespTicketPerEntreprise(Long id);

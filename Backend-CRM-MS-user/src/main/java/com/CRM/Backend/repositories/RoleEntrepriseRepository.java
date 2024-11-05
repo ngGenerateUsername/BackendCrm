@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 public interface RoleEntrepriseRepository extends JpaRepository<RoleEntreprise, Long> {
      
     List<RoleEntreprise> findByIdEntreprise (Long id );
+    List<RoleEntreprise> findByIdFournisseur (Long id );
+
     List<RoleEntreprise> findByIdContact (Long id );
 
     @Query(value = "SELECT * from role_entreprise companie where companie.id_entreprise:=id and role_contact:=role",nativeQuery = true)

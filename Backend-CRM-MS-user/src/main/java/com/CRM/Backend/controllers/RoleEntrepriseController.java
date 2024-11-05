@@ -66,6 +66,14 @@ public class RoleEntrepriseController {
         return IRoleEntrepriseService.retrievecontactsPerEntreprise(id);
     }
 
+    @ApiOperation(value = "Rechercher les contacts d'une Fournisseur")
+    @GetMapping("/contactsPerFournisseur")
+    // @PreAuthorize("hasRole('ADMIN') or hasRole('PROPRIETAIRE') or hasRole('COMMERCIAL') or hasRole('RESPONSABLETICKET')")
+    public List<Contact> contactsPerFournisseur(@Param("id") Long id) {
+        return IRoleEntrepriseService.retrievecontactsPerFournisseur(id);
+    }
+
+
     @ApiOperation(value = "Rechercher l'entreprise d'un proprietaire")
     @GetMapping("/entreprisePerProp")
     //@PreAuthorize("hasRole('ADMIN') or hasRole('PROPRIETAIRE') or hasRole('COMMERCIAL') or hasRole('RESPONSABLETICKET')")

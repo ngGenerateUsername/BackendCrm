@@ -92,6 +92,18 @@ public class RoleEntrepriseImpl implements IRoleEntrepriseService {
 		return Contacts;
 	}
 
+	public List<Contact> retrievecontactsPerFournisseur(Long id) {
+		List<RoleEntreprise>  role_entreprises = roleEntrepriseRepository.findByIdFournisseur(id);
+		System.out.println(id);
+		System.out.println(role_entreprises);
+		List<Contact> Contacts = new ArrayList<>();
+		for (RoleEntreprise roleEntreprise : role_entreprises) {
+				Contacts.add(userRepository.findById(roleEntreprise.getIdContact()).get());
+			}
+
+		return Contacts;
+	}
+
 	public Entreprise retrieveEntreprisesPerProp(Long id) {
 		List<RoleEntreprise>  role_entreprises = roleEntrepriseRepository.findAll();
 		//List<entreprise> listeEntreprise = new ArrayList<>();

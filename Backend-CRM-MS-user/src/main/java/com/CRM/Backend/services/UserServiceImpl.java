@@ -257,6 +257,16 @@ public class UserServiceImpl implements IUserService {
 								.orElseThrow(() -> new RuntimeException("Error: Role is not found33."));
 						roles.add(CONTACTRole);
 						break;
+					case "CONTACTFOURISSEUR":
+						Role FOURNISSEURRole = roleRepository.findByName(RoleUser.ROLE_CONTACTFOURISSEUR)
+								.orElseThrow(() -> new RuntimeException("Error: Role is not found33."));
+						roles.add(FOURNISSEURRole);
+						break;
+					case "STOCK":
+						Role STOCKRole = roleRepository.findByName(RoleUser.ROLE_STOCK)
+								.orElseThrow(() -> new RuntimeException("Error: Role is not found33."));
+						roles.add(STOCKRole);
+						break;
 					default:
 						new RuntimeException("Error: Role is not found44.");
 				}

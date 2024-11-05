@@ -26,8 +26,10 @@ public class RoleEntreprise implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long idRole;
 	Long idEntreprise;
-	
-    @Enumerated(EnumType.STRING)
+	Long idFournisseur;
+
+
+	@Enumerated(EnumType.STRING)
 	RoleUser roleUser;
 
 	Long idContact;

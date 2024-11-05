@@ -28,6 +28,8 @@ public class RelationClientUser implements Serializable {
 
     Long idEntreprise;
 
+
+
     @Temporal(TemporalType.DATE)
     Date dateCreation;
 
