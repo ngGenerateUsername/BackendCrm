@@ -31,14 +31,16 @@ public class IAOServiceImp implements IAOService {
         appeloffre.setIdproduit(idproduit);
         appeloffre.setCategorie(produitRepository.findById(idproduit).get().getCategorie().getNom());
         appeloffre.setTva(produitRepository.findById(idproduit).get().getCategorie().getTva());
+        appeloffre.setIdetse(produitRepository.findById(idproduit).get().getIdEntreprise());
         appeloffre.setNometse(entrepriseServiceFeignClient.getEntrepriseDetails(produitRepository.findById(idproduit).get().getIdEntreprise()).getNomEntreprise());
         appeloffre.setNomprod(produitRepository.findById(idproduit).get().getNom());
         appeloffre.setDateCloture(appeloffre.getDateCloture());
-        appeloffre.setNum(appeloffre.getNum());
         appeloffre.setDescription(appeloffre.getDescription());
         appeloffre.setQuantite(appeloffre.getQuantite());
         appeloffre.setRef(appeloffre.getRef());
         appeloffre.setEtat(etatAO.en_cours  );
+        appeloffre.generateNum(aoRepository); // Pass the repository to generate num
+
         Notif n = notifRepository.findByIdProduit(idproduit).get();
         n.setClickable(false);
         n.setMsg( n.getMsg() + " et on a deja crrer un appel d'offre ");
@@ -54,6 +56,16 @@ public class IAOServiceImp implements IAOService {
     public Appeloffre findByIdproduitAndEtat(Long idproduit) {
        
       return  aoRepository.findByIdproduitAndEtat(idproduit, etatAO.en_cours);
+    }
+
+    @Override
+    public Appeloffre findbyid(Long idappeloffre) {
+        return aoRepository.findById(idappeloffre).get();
+    }
+
+    @Override
+    public List<Appeloffre> findbyidetse(Long idetse) {
+        return  aoRepository.findAllByIdetse(idetse );
     }
 
 

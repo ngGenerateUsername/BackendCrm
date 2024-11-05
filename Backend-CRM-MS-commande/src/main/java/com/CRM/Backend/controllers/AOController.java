@@ -42,7 +42,7 @@ public class AOController {
         return aoService.getllAo();
 
     }
-    @GetMapping("getAOproduit{idproduit}")
+    @GetMapping("getAOproduit/{idproduit}")
 
     public Appeloffre getAppelbyidproduit(@PathVariable Long idproduit ) {
 
@@ -55,6 +55,19 @@ public class AOController {
 
 }
 
+    @GetMapping ("appeloffre/{idao}")
+    public Appeloffre getAO(@PathVariable Long idao) {
+        return  aoService.findbyid(idao);
+
+    }
+
+    @GetMapping("getallAO/{idetse}")
+
+    public List<Appeloffre> getallAppeloffrebyetse(@PathVariable Long idetse ) {
+
+        return aoService.findbyidetse( idetse);
+
+    }
 
 
 }

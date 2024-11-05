@@ -1,8 +1,10 @@
 package com.CRM.Backend.entities;
 
+import com.CRM.Backend.repositories.AORepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +21,9 @@ import java.util.Date;
 public class Appeloffre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idao;
+    @GeneratedValue(strategy = GenerationType.AUTO )
     private Long num;
     private String ref;
     private String description;
@@ -41,6 +45,12 @@ public class Appeloffre implements Serializable {
     private etatAO etat;
     private  String nomprod;
     private double tva;
+    private  Long idetse;
 
+
+
+    public void generateNum(AORepository repository) {
+        this.num = repository.findMaxNum() + 1; // Get max and increment
+    }
 
 }

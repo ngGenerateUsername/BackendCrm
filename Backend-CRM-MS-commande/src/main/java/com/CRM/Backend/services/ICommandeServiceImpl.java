@@ -207,7 +207,6 @@ public class ICommandeServiceImpl implements ICommandeService {
         }
         for (Produit p : productList) {
             boolean isCritical = p.getQte() < p.getMinQte();
-            System.out.println( iaoService.findByIdproduitAndEtat(p.getIdProduit()));
 
             if (isCritical && !criticalProducts.getOrDefault(p.getIdProduit(), false )) {
                 Optional<Notif> existingNotif = notifRepository.findByIdProduit(p.getIdProduit());
