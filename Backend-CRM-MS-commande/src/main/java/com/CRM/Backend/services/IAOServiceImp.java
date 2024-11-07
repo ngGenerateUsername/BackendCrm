@@ -32,6 +32,7 @@ public class IAOServiceImp implements IAOService {
         appeloffre.setCategorie(produitRepository.findById(idproduit).get().getCategorie().getNom());
         appeloffre.setTva(produitRepository.findById(idproduit).get().getCategorie().getTva());
         appeloffre.setIdetse(produitRepository.findById(idproduit).get().getIdEntreprise());
+        appeloffre.setDescriptionProduit(produitRepository.findById(idproduit).get().getDescription());
         appeloffre.setNometse(entrepriseServiceFeignClient.getEntrepriseDetails(produitRepository.findById(idproduit).get().getIdEntreprise()).getNomEntreprise());
         appeloffre.setNomprod(produitRepository.findById(idproduit).get().getNom());
         appeloffre.setDateCloture(appeloffre.getDateCloture());

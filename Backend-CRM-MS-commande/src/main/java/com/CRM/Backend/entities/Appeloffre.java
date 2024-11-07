@@ -46,6 +46,7 @@ public class Appeloffre implements Serializable {
     private  String nomprod;
     private double tva;
     private  Long idetse;
+    private String descriptionProduit;
 
 
 
