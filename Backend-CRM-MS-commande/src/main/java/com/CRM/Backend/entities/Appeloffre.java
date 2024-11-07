@@ -2,6 +2,7 @@ package com.CRM.Backend.entities;
 
 import com.CRM.Backend.repositories.AORepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,7 +35,7 @@ public class Appeloffre implements Serializable {
     private LocalDateTime  DatePublication  = LocalDateTime.now();
 
     @Temporal(TemporalType.DATE)
-    private Date dateCloture ;
+    private Date dateCloture;
 
     private int  quantite ;
     private Long idf;
@@ -48,6 +50,10 @@ public class Appeloffre implements Serializable {
     private  Long idetse;
     private String descriptionProduit;
 
+
+    @OneToMany(mappedBy = "appeloffre",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Participation> pcs;
 
 
     public void generateNum(AORepository repository) {
