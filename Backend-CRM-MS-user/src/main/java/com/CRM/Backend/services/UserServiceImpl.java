@@ -351,6 +351,7 @@ public class UserServiceImpl implements IUserService {
 		for (Contact c : AllContacts) {
 		if(c.getRoles().iterator().next().getName().toString().equals("ROLE_CONTACT") ){
 			contacts.add(c);
+
 		}
 		}
 		return contacts;

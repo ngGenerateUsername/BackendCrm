@@ -1,5 +1,6 @@
 package com.CRM.Backend.controllers;
 
+import com.CRM.Backend.entities.Entreprise;
 import com.CRM.Backend.entities.Fournisseur;
 import com.CRM.Backend.entities.Fournisseur;
 import com.CRM.Backend.entities.RoleEntreprise;
@@ -60,5 +61,15 @@ public class FournisseurController {
     public RoleEntreprise ajoutRole_Fournisseur(@Valid @RequestBody RoleEntreprise e)
     {return IRoleEntrepriseService.ajoutRoleEntreprise (e);
     }
+
+    @GetMapping("/FournisseurPerContact")
+    // @PreAuthorize("hasRole('ADMIN') or hasRole('PROPRIETAIRE') or hasRole('COMMERCIAL') or hasRole('RESPONSABLETICKET')")
+    public Fournisseur FournisseurPerContact(@Param("id") Long id) {
+        return IFournisseurService.retrieveFournissuerPercontatc(id);
+    }
+
+
+
+
 }
 

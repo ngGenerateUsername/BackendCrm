@@ -1,8 +1,11 @@
 package com.CRM.Backend.services;
 
+import com.CRM.Backend.entities.Entreprise;
 import com.CRM.Backend.entities.Fournisseur;
+import com.CRM.Backend.entities.RoleEntreprise;
 import com.CRM.Backend.entities.StatusUser;
 import com.CRM.Backend.repositories.FournisseurRepository;
+import com.CRM.Backend.repositories.RoleEntrepriseRepository;
 import com.CRM.Backend.servicesInterfaces.IFournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +20,11 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	@Autowired
 	FournisseurRepository FournisseurRepository;
 
-    public List<Fournisseur> retrieveAllFournisseurs() {
+	@Autowired
+	RoleEntrepriseRepository roleEntrepriseRepository;
+
+
+	public List<Fournisseur> retrieveAllFournisseurs() {
 		return FournisseurRepository.findAll();
 	}
 
@@ -74,7 +81,20 @@ public class FournisseurServiceImpl implements IFournisseurService {
 		}
 	}
 
-    public Fournisseur FournisseurDetails(Long id) {
+	@Override
+	public Fournisseur retrieveFournissuerPercontatc(Long id) {
+		List<RoleEntreprise>  role_entreprises = roleEntrepriseRepository.findAll();
+		System.out.println(role_entreprises);
+		for (RoleEntreprise roleEntreprise : role_entreprises) {
+			if(roleEntreprise.getIdContact().equals(id))
+				return FournisseurRepository.findById(roleEntreprise.getIdFournisseur() ).get();
+		}
+		return new Fournisseur();
+	}
+
+
+
+	public Fournisseur FournisseurDetails(Long id) {
 		return FournisseurRepository.findById(id).get();
 	}
 }

@@ -10,4 +10,6 @@ public interface IFournisseurService {
     public Fournisseur ajoutFournisseur(Fournisseur e);
     public Fournisseur FournisseurDetails(Long id);
     public Fournisseur updateFournisseur(Fournisseur cc);
+    public Fournisseur retrieveFournissuerPercontatc(Long id);
+
 }
