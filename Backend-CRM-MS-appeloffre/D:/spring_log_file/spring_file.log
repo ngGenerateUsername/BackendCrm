@@ -1,0 +1,68 @@
+2024-11-11 10:36:02.158  INFO 32906 --- [restartedMain] com.CRM.Backend.CrmApplication           : Starting CrmApplication using Java 11.0.25 on chedi-HP-15-Notebook-PC with PID 32906 (/home/chedi/backendCrm/Backend-CRM-MS-commande/target/classes started by chedi in /home/chedi/backendCrm/Backend-CRM-MS-commande)
+2024-11-11 10:36:02.163  INFO 32906 --- [restartedMain] com.CRM.Backend.CrmApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-11-11 10:36:02.235  INFO 32906 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-11 10:36:02.236  INFO 32906 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-11 10:36:02.983  INFO 32906 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-11 10:36:03.039  INFO 32906 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 11 JPA repository interfaces.
+2024-11-11 10:36:03.233  INFO 32906 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8e73b653-06a3-35a3-bd82-c73179607f24
+2024-11-11 10:36:03.664  INFO 32906 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (http)
+2024-11-11 10:36:03.670  INFO 32906 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-11 10:36:03.671  INFO 32906 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-11-11 10:36:03.724  INFO 32906 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-11 10:36:03.725  INFO 32906 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1489 ms
+2024-11-11 10:36:03.852  INFO 32906 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-11 10:36:03.875  INFO 32906 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2024-11-11 10:36:03.944  INFO 32906 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-11 10:36:03.994  INFO 32906 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-11 10:36:04.180  INFO 32906 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-11 10:36:04.188  INFO 32906 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2024-11-11 10:36:04.795  INFO 32906 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-11 10:36:04.799  INFO 32906 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-11 10:36:05.219  WARN 32906 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-11 10:36:05.250  INFO 32906 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-11 10:36:05.709 DEBUG 32906 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 52 mappings in 'requestMappingHandlerMapping'
+2024-11-11 10:36:05.871 DEBUG 32906 --- [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2024-11-11 10:36:05.976 DEBUG 32906 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-11 10:36:05.998 DEBUG 32906 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2024-11-11 10:36:06.013 DEBUG 32906 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui/**] in 'resourceHandlerMapping'
+2024-11-11 10:36:06.020 DEBUG 32906 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-11 10:36:06.483  INFO 32906 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (http) with context path ''
+2024-11-11 10:36:07.458 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-11-11 10:36:07.458 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@2410b25f added SimpAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-11-11 10:36:07.458  INFO 32906 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-11-11 10:36:07.458 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@87ec9aa added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
+2024-11-11 10:36:07.458 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@1c8937b9 added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
+2024-11-11 10:36:07.459  INFO 32906 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2024-11-11 10:36:07.459  INFO 32906 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-11-11 10:36:07.459 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@22aa1131 added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-11 10:36:07.459 DEBUG 32906 --- [restartedMain] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@318057da added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-11 10:36:07.469  INFO 32906 --- [restartedMain] com.CRM.Backend.CrmApplication           : Started CrmApplication in 5.866 seconds (JVM running for 6.274)
+2024-11-11 10:36:18.683  INFO 32906 --- [http-nio-9999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-11 10:36:18.684  INFO 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-11 10:36:18.684 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-11-11 10:36:18.684 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-11-11 10:36:18.684 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-11-11 10:36:18.686 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@66e00e59
+2024-11-11 10:36:18.688 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4f64c582
+2024-11-11 10:36:18.689 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-11-11 10:36:18.689  INFO 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2024-11-11 10:36:18.707 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : OPTIONS "/commande/mycommande/1", parameters={}
+2024-11-11 10:36:18.714 DEBUG 32906 --- [http-nio-9999-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.CRM.Backend.controllers.CommandeController#alllignecmd(Long)
+2024-11-11 10:36:18.719 DEBUG 32906 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-11 10:36:18.728 DEBUG 32906 --- [http-nio-9999-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/commande/mycommande/1", parameters={}
+2024-11-11 10:36:18.730 DEBUG 32906 --- [http-nio-9999-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.CRM.Backend.controllers.CommandeController#alllignecmd(Long)
+2024-11-11 10:36:18.768 DEBUG 32906 --- [http-nio-9999-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2024-11-11 10:36:18.793 DEBUG 32906 --- [http-nio-9999-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [java.lang.StackOverflowError]
+2024-11-11 10:36:18.834 DEBUG 32906 --- [http-nio-9999-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-11 10:36:27.907 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-11-11 10:36:27.908 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@2410b25f removed SimpAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-11-11 10:36:27.908  INFO 32906 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2024-11-11 10:36:27.908  INFO 32906 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2024-11-11 10:36:27.908 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@87ec9aa removed SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
+2024-11-11 10:36:27.908 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@1c8937b9 removed SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
+2024-11-11 10:36:27.908  INFO 32906 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2024-11-11 10:36:27.908 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@22aa1131 removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-11 10:36:27.908 DEBUG 32906 --- [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : ExecutorSubscribableChannel@318057da removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-11 10:36:27.935  INFO 32906 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-11 10:36:27.937  INFO 32906 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-11 10:36:27.949  INFO 32906 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
