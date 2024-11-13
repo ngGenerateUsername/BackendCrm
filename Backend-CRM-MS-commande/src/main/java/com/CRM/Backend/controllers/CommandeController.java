@@ -6,6 +6,7 @@ import com.CRM.Backend.entities.Commande;
 import com.CRM.Backend.entities.Dto.DTOCommande;
 import com.CRM.Backend.entities.Dto.DTOLigneCommande;
 import com.CRM.Backend.entities.Notif;
+import com.CRM.Backend.servicesInterfaces.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import com.CRM.Backend.servicesInterfaces.ICommandeService;
 public class CommandeController {
     @Autowired
     ICommandeService iCommandeService;
+
     @GetMapping("mycommande/{idClient}")
     public List<Commande> alllignecmd(@PathVariable Long idClient){
         return  iCommandeService.getAllCommandebyuser(idClient);
@@ -56,4 +58,7 @@ public class CommandeController {
 
         return  iCommandeService.getnotifbyid(idn);
     }
+
+
+
 }

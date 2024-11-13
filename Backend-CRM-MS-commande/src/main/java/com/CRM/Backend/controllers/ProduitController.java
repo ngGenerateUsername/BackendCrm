@@ -6,6 +6,7 @@ import com.CRM.Backend.entities.Notif;
 import com.CRM.Backend.entities.Produit;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.ICommandeService;
+import com.CRM.Backend.servicesInterfaces.INotificationService;
 import com.CRM.Backend.servicesInterfaces.IProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,9 @@ public class ProduitController {
     ProduitRepository produitRepository;
     @Autowired
     ICommandeService iCommandeService;
+
+    @Autowired
+    INotificationService notificationService;
 
 
     @PostMapping( value = "addproduit/{IDcategorie}",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -91,7 +95,20 @@ public class ProduitController {
         return iCommandeService.allnotifetse()  ;
     }
 
+    @GetMapping ("nometntreprise/{idprod}")
+    public String getnometse(@PathVariable Long idprod) {
+        return  iProduitService.getnometse(idprod);
+
+    }
 
 
+    @GetMapping("notifbyidprodiot/{idproduit}")
+    public Notif getnotifbyidprod(@PathVariable Long idproduit){
+        return iProduitService.findByIdProduit(idproduit);
+    }
+    @PutMapping("updateNotifcation/{idn}")
+    public Notif updatenotification( @RequestBody Notif n, @PathVariable Long idn ){
+        return notificationService.updatenotification(n ,idn);
+    }
 }
 

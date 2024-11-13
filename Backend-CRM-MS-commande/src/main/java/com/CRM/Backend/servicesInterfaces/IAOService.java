@@ -1,6 +1,7 @@
 package com.CRM.Backend.servicesInterfaces;
 
 import com.CRM.Backend.entities.Appeloffre;
+import com.CRM.Backend.entities.Notif;
 import com.CRM.Backend.entities.etatAO;
 
 import java.util.List;

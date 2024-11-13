@@ -2,6 +2,7 @@ package com.CRM.Backend.servicesInterfaces;
 
 import com.CRM.Backend.entities.Dto.DTOProduit;
 import com.CRM.Backend.entities.Dto.DTOProduitCmd;
+import com.CRM.Backend.entities.Notif;
 import com.CRM.Backend.entities.Produit;
 import org.springframework.http.ResponseEntity;
 
@@ -21,5 +22,6 @@ public interface IProduitService {
 
     public List<DTOProduitCmd> getAllProduitCMDBYCategorie( Long id);
     //public ResponseEntity<List<String>> available(Long idets);
+    public Notif findByIdProduit(Long idproduit);
 
 }

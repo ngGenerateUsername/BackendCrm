@@ -153,6 +153,11 @@ public class IProduitServiceImp implements IProduitService {
         }
         return listprodcmd;
     }
+
+    @Override
+    public Notif findByIdProduit(Long idproduit) {
+        return notifRepository.findByIdProduit(idproduit).get() ;
+    }
 /*
     @Override
     @Scheduled(fixedRate = 5000)

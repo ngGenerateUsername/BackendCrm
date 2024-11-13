@@ -49,11 +49,7 @@ public class AOController {
         return aoService.findByIdproduitAndEtat(idproduit);
 
     }
-@GetMapping ("nometntreprise/{idprod}")
-    public String getnometse(@PathVariable Long idprod) {
-        return  iProduitService.getnometse(idprod);
 
-}
 
     @GetMapping ("appeloffre/{idao}")
     public Appeloffre getAO(@PathVariable Long idao) {

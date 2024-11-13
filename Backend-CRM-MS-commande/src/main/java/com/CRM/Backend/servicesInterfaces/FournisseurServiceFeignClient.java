@@ -1,15 +1,20 @@
 package com.CRM.Backend.servicesInterfaces;
-import com.CRM.Backend.entities.Entreprise;
+
+import com.CRM.Backend.entities.Fournisseur;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "EntrepriseService", url = "http://localhost:8080/api/entreprise")
+@FeignClient(name = "fournisseurService", url = "http://localhost:8080/api/Fournisseur")
 public interface FournisseurServiceFeignClient {
 
-        // Define the method to call the clientDetails endpoint
-        @GetMapping("/EntrepriseDetails")
-        Entreprise getEntrepriseDetails(@RequestParam("id") Long id);
-    }
+    @GetMapping("/Fournisseurs")
+    Fournisseur retrieveAllFournisseurs();
 
+    @GetMapping("/FournisseurDetails")
+     Fournisseur FournisseurDetails(@RequestParam("id") Long id);
 
+    @GetMapping("/FournisseurPerContact")
+     Fournisseur FournisseurPerContact(@RequestParam("id") Long id);
+}

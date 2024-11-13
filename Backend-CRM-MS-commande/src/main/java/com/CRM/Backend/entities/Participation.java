@@ -22,9 +22,6 @@ public class Participation {
     private int prix;
     @Temporal(TemporalType.DATE)
     private Date datesoummision ;
-
-
-
     private Long IdFournisseur;
 
     @ManyToOne
