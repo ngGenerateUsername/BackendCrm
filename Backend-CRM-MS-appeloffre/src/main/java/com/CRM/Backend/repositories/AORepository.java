@@ -1,7 +1,6 @@
 package com.CRM.Backend.repositories;
 
 import com.CRM.Backend.entities.Appeloffre;
-import com.CRM.Backend.entities.BonDeCommande;
 import com.CRM.Backend.entities.etatAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

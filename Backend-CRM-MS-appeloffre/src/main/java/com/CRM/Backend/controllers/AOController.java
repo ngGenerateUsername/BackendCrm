@@ -2,10 +2,8 @@ package com.CRM.Backend.controllers;
 
 import com.CRM.Backend.entities.Appeloffre;
 import com.CRM.Backend.entities.Categorie;
-import com.CRM.Backend.entities.Dto.DTOCategorie;
 import com.CRM.Backend.services.IAOServiceImp;
 import com.CRM.Backend.servicesInterfaces.IAOService;
-import com.CRM.Backend.servicesInterfaces.IProduitService;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,7 @@ public class AOController {
     @Autowired
     IAOService aoService;
 
-    @Autowired
-    IProduitService iProduitService;
+
     @PostMapping("ADDAO/{idproduit}")
 
     public Appeloffre addAppeloffre(@RequestBody Appeloffre appeloffre,@PathVariable Long idproduit ) {
@@ -49,11 +46,7 @@ public class AOController {
         return aoService.findByIdproduitAndEtat(idproduit);
 
     }
-@GetMapping ("nometntreprise/{idprod}")
-    public String getnometse(@PathVariable Long idprod) {
-        return  iProduitService.getnometse(idprod);
 
-}
 
     @GetMapping ("appeloffre/{idao}")
     public Appeloffre getAO(@PathVariable Long idao) {
