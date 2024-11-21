@@ -19,6 +19,7 @@ import javax.websocket.server.PathParam;
     Produit produitdetaille(@PathVariable("idProduit") Long idProduit);
 
 
+
 }
 
 

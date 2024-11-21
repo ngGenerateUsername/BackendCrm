@@ -18,8 +18,9 @@ private Long idUser;
     String Domaine;
     String Description;
     Long numFiscal;
-
-
+    String adresse;
+  String domaine;
+    String mail;
 
 
 }

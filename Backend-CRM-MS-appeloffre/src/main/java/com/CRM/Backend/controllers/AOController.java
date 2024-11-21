@@ -1,7 +1,6 @@
 package com.CRM.Backend.controllers;
 
-import com.CRM.Backend.entities.Appeloffre;
-import com.CRM.Backend.entities.Categorie;
+import com.CRM.Backend.entities.*;
 import com.CRM.Backend.services.IAOServiceImp;
 import com.CRM.Backend.servicesInterfaces.IAOService;
 import lombok.extern.log4j.Log4j;
@@ -61,6 +60,13 @@ public class AOController {
         return aoService.findbyidetse( idetse);
 
     }
-
+    @GetMapping("/participationappeloffre/{id}")
+    public List<Participationdetail> getParticipantsByAppeloffreId(@PathVariable("id") Long id) {
+        return aoService.participant (id);
+    }
+@DeleteMapping("/deleteAO/{idao}")
+    public void deleteAO(@PathVariable("idao") Long idao) {
+        aoService.deleteappeloffre(idao);
+    }
 
 }
