@@ -26,7 +26,7 @@ public class IAOServiceImp implements IAOService {
     @Autowired
     EntrepriseServiceFeignClient entrepriseServiceFeignClient;
 
-    @Override
+    /*@Override
     public Appeloffre AddAppeloff(Appeloffre appeloffre, Long idproduit) {
         appeloffre.setIdproduit(idproduit);
         appeloffre.setCategorie(produitRepository.findById(idproduit).get().getCategorie().getNom());
@@ -68,7 +68,7 @@ public class IAOServiceImp implements IAOService {
     public List<Appeloffre> findbyidetse(Long idetse) {
         return  aoRepository.findAllByIdetse(idetse );
     }
-
+*/
 
 
 }

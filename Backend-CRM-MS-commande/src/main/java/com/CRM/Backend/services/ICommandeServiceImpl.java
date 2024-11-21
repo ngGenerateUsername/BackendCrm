@@ -199,6 +199,7 @@ public class ICommandeServiceImpl implements ICommandeService {
 
     // Method triggered by REST API to accept dynamic idets from the frontend
     @Override
+    
     public ResponseEntity<List<String>> available( ) {
         List<String> notifications = new ArrayList<>();
         List<Produit> productList = productRepository.findAll();
@@ -254,8 +255,6 @@ public class ICommandeServiceImpl implements ICommandeService {
 
         return ResponseEntity.noContent().build(); // Return no content if no critical products
     }
-
-
     @Override
     public List<Notif> allnotifetse( ) {
     List<Notif> notifs = notifRepository.findAll();

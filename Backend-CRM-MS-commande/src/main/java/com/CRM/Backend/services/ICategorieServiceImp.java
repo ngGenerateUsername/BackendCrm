@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 
-public class ICategorieServiceImp implements ICategorieService {
+public class ICategorieServiceImp implements ICategorieService  {
 
     @Autowired
     CategorieRepository categorieRepository;

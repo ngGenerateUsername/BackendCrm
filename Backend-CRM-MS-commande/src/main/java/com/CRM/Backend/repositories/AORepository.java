@@ -11,13 +11,13 @@ import java.util.List;
 
 @Repository
 public interface AORepository extends JpaRepository<Appeloffre,Long> {
-
+/*
     public List<Appeloffre> findAllByIdetse(Long idetse) ;
 
     public Appeloffre findByIdproduitAndEtat(Long idproduit, etatAO etat)  ;
     @Query("SELECT COALESCE(MAX(a.num), 0) FROM Appeloffre a")
     Long findMaxNum();
 
-
+*/
 
 }

@@ -19,7 +19,7 @@ public class Participation {
 
     @Id
     private Long id;
-    private int prix;
+   /* private int prix;
     @Temporal(TemporalType.DATE)
     private Date datesoummision ;
     private Long IdFournisseur;
@@ -28,7 +28,7 @@ public class Participation {
     @JoinColumn(name = "IdAppelOffre")
     @JsonIgnore
     private Appeloffre appeloffre ;
-
+*/
 
 
 }

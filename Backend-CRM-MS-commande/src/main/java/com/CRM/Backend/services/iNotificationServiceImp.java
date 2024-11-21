@@ -25,6 +25,7 @@ NotifRepository notifRepository;
 
         notif.setClickable(false);
         notif.setMsg(n.getMsg());
+        notif.setClickable(n.isClickable());
         System.out.println(notif.getIdnotif());
         return notifRepository.save(notif);
     }

@@ -26,7 +26,7 @@ public class ParticipationServiceImp implements ParticipationService {
     ParticipationRepository participationRepository;
 
 
-    @Override
+    /*@Override
     public String participate(Participation p, Long idcf, Long idao) {
         String msg="test";
         Fournisseur f = fournisseurServiceFeignClient.FournisseurPerContact(idcf.longValue());
@@ -58,7 +58,7 @@ public class ParticipationServiceImp implements ParticipationService {
 
         return msg;
 
-}
+}*/
 
 
 }

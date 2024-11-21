@@ -27,7 +27,7 @@ public class AOController {
 
     @Autowired
     IProduitService iProduitService;
-    @PostMapping("ADDAO/{idproduit}")
+    /*@PostMapping("ADDAO/{idproduit}")
 
     public Appeloffre addAppeloffre(@RequestBody Appeloffre appeloffre,@PathVariable Long idproduit ) {
 
@@ -65,5 +65,5 @@ public class AOController {
 
     }
 
-
+*/
 }

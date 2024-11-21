@@ -20,15 +20,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-@Slf4j
-@Log4j
+
 @RestController
-@Validated
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/categorie")
 public class CategroieController {
     @Autowired
-    ICategorieService iCategorieService;
+    ICategorieService iCategorieService ;
     @PostMapping("AddCategorie")
     //@PreAuthorize("hasRole('ROLE_COMMERCIAL')")
 

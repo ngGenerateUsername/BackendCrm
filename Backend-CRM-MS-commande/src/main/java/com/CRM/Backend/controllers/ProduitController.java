@@ -4,6 +4,7 @@ import com.CRM.Backend.entities.Dto.DTOProduit;
 import com.CRM.Backend.entities.Dto.DTOProduitCmd;
 import com.CRM.Backend.entities.Notif;
 import com.CRM.Backend.entities.Produit;
+import com.CRM.Backend.repositories.NotifRepository;
 import com.CRM.Backend.repositories.ProduitRepository;
 import com.CRM.Backend.servicesInterfaces.ICommandeService;
 import com.CRM.Backend.servicesInterfaces.INotificationService;
@@ -33,6 +34,8 @@ public class ProduitController {
     @Autowired
     INotificationService notificationService;
 
+    @Autowired
+    NotifRepository notifRepository;
 
     @PostMapping( value = "addproduit/{IDcategorie}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Produit addProduit(@RequestBody DTOProduit dtoProduit , @PathVariable Long IDcategorie) {
@@ -110,5 +113,19 @@ public class ProduitController {
     public Notif updatenotification( @RequestBody Notif n, @PathVariable Long idn ){
         return notificationService.updatenotification(n ,idn);
     }
+
+
+    @PostMapping("createnotif")
+    public Notif create  (@RequestBody Notif n  ){
+
+        return  notifRepository.save(n);
+    }
+
+    @DeleteMapping("deletebyid/{idn}")
+    public void deletebyid  (@PathVariable Long idn  ){
+
+        notifRepository.deleteById(idn);
+    }
+
 }
 

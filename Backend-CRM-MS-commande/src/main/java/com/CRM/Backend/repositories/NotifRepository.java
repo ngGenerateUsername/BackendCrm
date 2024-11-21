@@ -17,4 +17,5 @@ public interface NotifRepository extends JpaRepository<Notif,Long> {
 
 
     Optional<Notif> findByIdProduit(Long idProduit);
+
 }

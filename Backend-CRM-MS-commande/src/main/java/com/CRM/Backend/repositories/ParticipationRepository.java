@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ParticipationRepository extends JpaRepository<Participation,Long> {
     //Boolean existsByIdFournisseurAndAndAndAppeloffre_Idao (Long idf,Long idao);
-     List<Participation> findByAppeloffre_Idao (Long idao);
+    // List<Participation> findByAppeloffre_Idao (Long idao);
 
 }

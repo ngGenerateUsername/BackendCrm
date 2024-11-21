@@ -38,7 +38,7 @@ public class Appeloffre implements Serializable {
     private Date dateCloture;
 
     private int  quantite ;
-    private Long idf;
+    /*private Long idf;
     private Long idcom;
     private String nometse;
     private Long idproduit;
@@ -58,6 +58,6 @@ public class Appeloffre implements Serializable {
 
     public void generateNum(AORepository repository) {
         this.num = repository.findMaxNum() + 1; // Get max and increment
-    }
+    }*/
 
 }
