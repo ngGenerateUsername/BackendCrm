@@ -21,7 +21,7 @@ public class Participation {
     private Long id;
     private int prix;
     @Temporal(TemporalType.DATE)
-    private Date datesoummision ;
+    private Date dateLivraisonF;
     private Long IdFournisseur;
 
     @ManyToOne

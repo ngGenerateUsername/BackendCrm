@@ -128,7 +128,7 @@ com.CRM.Backend.servicesInterfaces.RoleFournisseurServiceFeignClient roleFournis
             Produit p = produitServiceFeignClient.produitdetaille(a.getIdproduit());
             if (notification != null) {
                 System.out.println("9ball upadete "+ notification.isClickable());
-                    notification.setClickable(true);
+                notification.setClickable(true);
 
                 System.out.println("ba3ed l update "+notification.isClickable());
                 notification.setMsg("Produit " + a.getNomprod () +" avec quantité " + p.getQte() +" est en état de stock critique ");
@@ -164,7 +164,7 @@ com.CRM.Backend.servicesInterfaces.RoleFournisseurServiceFeignClient roleFournis
             detail.setAdresse(fournisseur.getAdresse());
             detail.setUsername (fournisseur.getNomFournisseur());
             detail.setPrix (participation.getPrix() );
-            detail.setDatesoummision(participation.getDatesoummision());
+            detail.setDatesoummision(participation.getDateLivraisonF());
             detail.setMail(fournisseur.getMail ());
             detail.setDoamine(fournisseur.getDomaine());
 

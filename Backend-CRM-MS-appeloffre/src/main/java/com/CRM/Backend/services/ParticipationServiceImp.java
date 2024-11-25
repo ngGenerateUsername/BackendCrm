@@ -44,7 +44,7 @@ public class ParticipationServiceImp implements ParticipationService {
 
             p.setIdFournisseur(f.getIdUser());
             p.setPrix(p.getPrix());
-            p.setDatesoummision(p.getDatesoummision());
+            p.setDateLivraisonF(p.getDateLivraisonF());
             p.setAppeloffre(aoRepository.findById(idao).get());
             participationRepository.save(p);
 
