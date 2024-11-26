@@ -5,13 +5,13 @@ import com.CRM.Backend.repositories.AORepository;
 import com.CRM.Backend.repositories.ParticipationRepository;
 import com.CRM.Backend.servicesInterfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.Optional;
+
+import java.util.*;
 import javax.persistence.EntityNotFoundException;
 import feign.FeignException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import feign.FeignException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class IAOServiceImp implements IAOService {
@@ -21,6 +21,9 @@ public class IAOServiceImp implements IAOService {
     IAOService iaoService;
     @Autowired
     ParticipationRepository participationRepository;
+    @Autowired
+    ParticipationService participationService;
+
 
 
     @Autowired
@@ -174,5 +177,7 @@ com.CRM.Backend.servicesInterfaces.RoleFournisseurServiceFeignClient roleFournis
         return participationDetails;
     }
 
-
 }
+
+
+
