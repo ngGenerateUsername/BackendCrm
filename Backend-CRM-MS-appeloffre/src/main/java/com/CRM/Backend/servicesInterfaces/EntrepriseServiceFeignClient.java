@@ -10,6 +10,8 @@ public interface EntrepriseServiceFeignClient {
         // Define the method to call the clientDetails endpoint
         @GetMapping("/EntrepriseDetails")
         Entreprise getEntrepriseDetails(@RequestParam("id") Long id);
+
+
     }
 
 

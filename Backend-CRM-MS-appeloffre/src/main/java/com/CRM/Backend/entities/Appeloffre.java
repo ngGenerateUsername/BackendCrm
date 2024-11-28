@@ -31,10 +31,8 @@ public class Appeloffre implements Serializable {
     private String ref;
     private String description;
 
-    @CreationTimestamp
-    @Column(updatable = false, nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime datePublication = LocalDateTime.now();
+      @Temporal(TemporalType.DATE)
+    private Date datePublication = new Date();
 
     @Temporal(TemporalType.DATE)
     private Date dateCloture;

@@ -22,6 +22,8 @@ public class Participationdetail {
     private int prix;
     @Temporal(TemporalType.DATE)
     private Date datesoummision ;
+    @Temporal(TemporalType.DATE)
+    private Date datepub ;
     private String adresse;
 private String mail;
     private String telephone;

@@ -21,12 +21,6 @@ public interface FournisseurServiceFeignClient {
     Fournisseur FournisseurPerContact(@RequestParam("id") Long id);
 }
 /*
-@GetMapping("/contactsPerFournisseur")
-Fournisseur FournisseurPerContact(@RequestParam("id") Long id);
-}
-GET http://localhost:8080/api/role_entreprise/contactsPerFournisseur//get it here
-//if deleted ao
-//get list of four participant there
-//get the contact f  id
-// set a nottif msg
-//delete the particpation and the offree*/
+
+
+*/

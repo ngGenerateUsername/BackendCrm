@@ -1,10 +1,12 @@
 package com.CRM.Backend.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+
 
 @Entity
 @Getter
@@ -23,7 +25,8 @@ public class Participation {
     @Temporal(TemporalType.DATE)
     private Date dateLivraisonF;
     private Long IdFournisseur;
-
+    @Temporal(TemporalType.DATE)
+    private Date publicationoffre = new Date();;
     @ManyToOne
     @JoinColumn(name = "IdAppelOffre")
     @JsonIgnore

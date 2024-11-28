@@ -170,7 +170,7 @@ com.CRM.Backend.servicesInterfaces.RoleFournisseurServiceFeignClient roleFournis
             detail.setDatesoummision(participation.getDateLivraisonF());
             detail.setMail(fournisseur.getMail ());
             detail.setDoamine(fournisseur.getDomaine());
-
+            detail.setDatepub(participation.getPublicationoffre());
             participationDetails.add(detail);
         }
 
