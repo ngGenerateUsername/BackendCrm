@@ -31,6 +31,8 @@ public class Participation {
     @JoinColumn(name = "IdAppelOffre")
     @JsonIgnore
     private Appeloffre appeloffre ;
+    private String description;
+
 
 
 

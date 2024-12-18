@@ -8,132 +8,193 @@ import com.CRM.Backend.servicesInterfaces.NotificationServiceFeignClient;
 import com.CRM.Backend.servicesInterfaces.ParticipationService;
 import com.CRM.Backend.servicesInterfaces.RoleFournisseurServiceFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 @Service
-
 public class ParticipationServiceImp implements ParticipationService {
 
-    @Autowired
-    FournisseurServiceFeignClient fournisseurServiceFeignClient;
+    private static final Logger logger = Logger.getLogger(ParticipationServiceImp.class.getName());
 
     @Autowired
-    AORepository aoRepository;
+    private FournisseurServiceFeignClient fournisseurServiceFeignClient;
 
     @Autowired
-    ParticipationRepository participationRepository;
+    private AORepository aoRepository;
 
     @Autowired
-    NotificationServiceFeignClient notificationServiceFeignClient;
+    private ParticipationRepository participationRepository;
+
     @Autowired
-    RoleFournisseurServiceFeignClient roleFournisseurServiceFeignClient;
+    private NotificationServiceFeignClient notificationServiceFeignClient;
+
+    @Autowired
+    private RoleFournisseurServiceFeignClient roleFournisseurServiceFeignClient;
 
     @Override
-    public String participate(Participation p, Long idcf, Long idao) {
-        String msg = "test";
-        Fournisseur f = fournisseurServiceFeignClient.FournisseurPerContact(idcf.longValue());
-        boolean hasParticipated = false;
-        List<Participation> participations = participationRepository.findByAppeloffre_Idao(idao);
+    public String participate(Participation participation, MultipartFile file, Long contactId, Long tenderId) throws IOException {
+        String responseMessage;
 
-        for (Participation participation : participations) {
-            if (participation.getIdFournisseur().equals(f.getIdUser())) {
-                hasParticipated = true;
-                break;
+        // Save the uploaded file temporarily
+        File tempFile = File.createTempFile("upload", ".pdf");
+        file.transferTo(tempFile);
+
+        try {
+            // Extract text from the Python service
+            String extractedText = callPythonTextExtractionService(tempFile);
+
+            // Retrieve supplier information based on contact ID
+            Fournisseur fournisseur = fournisseurServiceFeignClient.FournisseurPerContact(contactId);
+
+            // Check if the supplier has already participated
+            boolean hasParticipated = participationRepository.findByAppeloffre_Idao(tenderId)
+                    .stream()
+                    .anyMatch(existing -> existing.getIdFournisseur().equals(fournisseur.getIdUser()));
+
+            if (!hasParticipated) {
+                // Set participation details
+                participation.setIdFournisseur(fournisseur.getIdUser());
+                participation.setDescription(extractedText); // Set the extracted text as description
+                participation.setAppeloffre(aoRepository.findById(tenderId).orElseThrow());
+                participationRepository.save(participation);
+
+                responseMessage = "Participation submitted successfully!";
+            } else {
+                responseMessage = "You have already participated in this tender.";
             }
-        }
-        if (!hasParticipated) {
-            p.setIdFournisseur(f.getIdUser());
-            p.setPrix(p.getPrix());
-            p.setDateLivraisonF(p.getDateLivraisonF());
-            p.setAppeloffre(aoRepository.findById(idao).get());
-            participationRepository.save(p);
-
-            msg = "particpation avec succeé";
-        } else {
-            msg = "you have alreadu partipated";
+        } finally {
+            // Clean up temporary file
+            tempFile.delete();
         }
 
-        return msg;
-
+        return responseMessage;
     }
 
     @Override
-    public void setBestFournisseurForTenders(List<Appeloffre>list )  {
-        List<Appeloffre> appelsOffres = aoRepository.findAll();
-        for (Appeloffre appelOffre : appelsOffres) {
+    public void setBestFournisseurForTenders(List<Appeloffre> tenders) {
+        for (Appeloffre tender : tenders) {
             double lowestScore = Double.MAX_VALUE;
             Long bestFournisseurId = null;
-            List<Participation> part = participationRepository.findByAppeloffre_Idao(appelOffre.getIdao());
-            for (Participation participation : part) {
-                double score = calculateScore(participation.getPrix(), participation.getDateLivraisonF(), appelOffre.getDateLivraisonAO());
-                System.out.println("Score for Participation ID " + participation.getId() + ": " + score);
+
+            List<Participation> participations = participationRepository.findByAppeloffre_Idao(tender.getIdao());
+
+            for (Participation participation : participations) {
+                // Call Python script to compute similarity
+                double similarityScore = callPythonSimilarityService(tender.getDescription(), participation.getDescription());
+                double score = calculateScore(
+                        participation.getPrix(),
+                        participation.getDateLivraisonF(),
+                        tender.getDateLivraisonAO(),
+                        similarityScore);
+
                 if (score < lowestScore) {
                     lowestScore = score;
                     bestFournisseurId = participation.getIdFournisseur();
                 }
             }
-            appelOffre.setIdf(bestFournisseurId);
-            aoRepository.save(appelOffre);
 
+            tender.setIdf(bestFournisseurId);
+            aoRepository.save(tender);
 
-            if (appelOffre.getDateCloture().before(new Date())) {
-
-                appelOffre.setEtat(etatAO.cloture);
-                aoRepository.save(appelOffre);
-
-                Fournisseur fournisseur = fournisseurServiceFeignClient.FournisseurDetails(bestFournisseurId);
-                List<Fournisseur> LIST = roleFournisseurServiceFeignClient.contactsPerFournisseur(fournisseur.getIdUser());
-
-                for (Fournisseur fournisseur1 : LIST) {
-                    // Get the contact ID directly
-                    Long contactId = fournisseur1.getIdUser();
-
-                    // Log the contact ID (for debugging, optional)
-                    System.out.println("Processing contact ID: " + contactId);
-
-                    // Create a notification for the current contact ID
-                    Notif notification = new Notif();
-                    notification.setClickable(true);
-
-                    // Create notification message
-                    notification.setMsg("Félicitations " + fournisseur.getNomFournisseur() +
-                            ", vous avez remporté l'appel d'offre de " + appelOffre.getNomprod());
-                    notification.setIDETSE(contactId);
-
-                    // Send the notification
-                    notificationServiceFeignClient.create(notification);
-                }
-
-
+            if (tender.getDateCloture().before(new Date())) {
+                closeTenderAndNotifyWinner(tender, bestFournisseurId);
             }
+        }
+    }
 
-        }}
-    private static double calculateScore(double prix, Date dateLivraisonF,Date datelao) {
-        // Example scoring logic: lower price and earlier delivery yield a better score
-        // You can adjust the weights as needed
+    private String callPythonTextExtractionService(File file) {
+        try {
+            String url = "http://localhost:5000/extract-text"; // Python service endpoint
+            RestTemplate restTemplate = new RestTemplate();
 
-        double priceWeight = 0.5;
-        double dateWeight = 0.5;
-        long differenceInMillis = datelao.getTime() - dateLivraisonF.getTime();
-        int daysToDelivery = (int) TimeUnit.MILLISECONDS.toDays(differenceInMillis);
-        System.out.println("haw y7seb  score:");
-        System.out.println("Prix: " + prix);
-        System.out.println("Date Livraisonf: " + dateLivraisonF);
-        System.out.println("Date LivraisonAO: " + datelao);
-        System.out.println("nhar s: " + daysToDelivery);
-        System.out.println(" Score: " + ((prix * priceWeight) + (daysToDelivery * dateWeight)));
-        System.out.println("            ");
-        System.out.println(" --------------------------------           ");
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            body.add("file", new FileSystemResource(file));
 
-        return (prix * priceWeight) + (daysToDelivery * dateWeight);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, requestEntity, Map.class);
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                return (String) response.getBody().get("text");
+            } else {
+                throw new RuntimeException("Failed to extract text from Python service.");
+            }
+        } catch (Exception e) {
+            logger.severe("Error calling Python text extraction service: " + e.getMessage());
+            throw new RuntimeException("Error extracting text via Python service.");
+        }
+    }
+
+
+    private double callPythonSimilarityService(String text1, String text2) {
+        try {
+            String url = "http://localhost:5000/similarity"; // Python similarity endpoint
+            RestTemplate restTemplate = new RestTemplate();
+
+            Map<String, String> requestBody = Map.of("text1", text1, "text2", text2);
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, requestBody, Map.class);
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                return Double.parseDouble(response.getBody().get("similarity").toString());
+            } else {
+                throw new RuntimeException("Failed to compute similarity from Python service.");
+            }
+        } catch (Exception e) {
+            logger.severe("Error calling Python similarity service: " + e.getMessage());
+            throw new RuntimeException("Error computing similarity via Python service.");
+        }
+    }
+
+    private void closeTenderAndNotifyWinner(Appeloffre tender, Long bestFournisseurId) {
+        tender.setEtat(etatAO.cloture);
+        aoRepository.save(tender);
+
+        Fournisseur bestFournisseur = fournisseurServiceFeignClient.FournisseurDetails(bestFournisseurId);
+        List<Fournisseur> contacts = roleFournisseurServiceFeignClient.contactsPerFournisseur(bestFournisseur.getIdUser());
+
+        for (Fournisseur contact : contacts) {
+            Notif notification = new Notif();
+            notification.setClickable(true);
+            notification.setMsg("Congratulations " + bestFournisseur.getNomFournisseur() +
+                    ", you have won the tender for " + tender.getNomprod());
+            notification.setIDETSE(contact.getIdUser());
+
+            notificationServiceFeignClient.create(notification);
+        }
+
+        logger.info("Notifications sent to the winning supplier contacts.");
+    }
+
+    private static double calculateScore(double price, Date deliveryDateSupplier, Date deliveryDateTender, double similarityScore) {
+        double priceWeight = 0.4;
+        double dateWeight = 0.4;
+        double similarityWeight = 0.2;
+
+        long timeDifferenceMillis = deliveryDateTender.getTime() - deliveryDateSupplier.getTime();
+        int deliveryDays = (int) TimeUnit.MILLISECONDS.toDays(timeDifferenceMillis);
+
+        return (price * priceWeight) + (deliveryDays * dateWeight) - (similarityScore * similarityWeight);
     }
 
     public Date normalizeDate(Date date) {
@@ -146,16 +207,12 @@ public class ParticipationServiceImp implements ParticipationService {
         return cal.getTime();
     }
 
-    @Scheduled(cron = "0 * * * * ?") // Runs every minute at the start of the minute
+    @Scheduled(cron = "0 * * * * ?") // Every minute
     public void processClosedTenders() {
-        // Normalize the current date
         Date currentDate = normalizeDate(new Date());
-
-        // Find tenders that are closed and haven't yet been assigned a best supplier
         List<Appeloffre> closedTenders = aoRepository.findByDateClotureBeforeAndIdfIsNull(currentDate);
 
         if (!closedTenders.isEmpty()) {
-            // Process only closed tenders to set the best supplier and send notifications
             setBestFournisseurForTenders(closedTenders);
         }
     }
